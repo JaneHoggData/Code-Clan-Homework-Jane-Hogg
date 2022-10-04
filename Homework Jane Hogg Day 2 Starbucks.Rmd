@@ -1,0 +1,57 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+drinks_content
+```
+
+Question 1.
+
+Load in the dataset (yipee did that) and have a look at it. What are the dimensions, variable types, variable names, etc.?
+10 beverage types.
+Variable types -beverage prep and type, variable names Calories
+<dbl>
+Total Fat (g)
+<chr>
+Trans Fat (g)
+<dbl>
+Saturated Fat (g)
+<dbl>
+Sodium (mg)
+Calories
+<dbl>
+Calories
+<dbl>
+Total Carbohydrates (g)
+<dbl>
+Cholesterol (mg)
+<dbl>
+Dietary Fibre (g)
+Sugars (g)
+<dbl>
+Protein (g)
+<dbl>
+Vitamin A (% DV)
+<chr>
+Vitamin C (% DV)
+Calcium (% DV)
+<chr>
+Iron (% DV)
+<chr>
+Caffeine 
+
+Question 2.
+
+Let’s first investigate the calories of different drinks. Select the variables Beverage_category, Beverage, Beverage prep and Calories from your data. Since we are interested in the calorie content, check if there are any NA values in the data, and drop them if there are.
+
+```{r}
+(drinks_content)
+```
+
+```{r}
+drinks_content
+Filter (Beverage_pre,)
+```
+
