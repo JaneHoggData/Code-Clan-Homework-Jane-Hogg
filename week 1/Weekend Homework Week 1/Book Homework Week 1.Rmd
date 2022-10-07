@@ -71,3 +71,8 @@ books %>%
   select(authors,language_code,publication_date)
 ```
 
+```{r}
+books %>%
+  select(authors,average_rating)
+```
+#Trying to look at authors with average rating more than 3
