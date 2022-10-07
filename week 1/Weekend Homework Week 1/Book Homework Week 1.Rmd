@@ -1,0 +1,73 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+library(CodeClanData)
+```
+
+# Loaded the Data in to R and also into Computer etc.
+
+```{r}
+books
+```
+
+#checking the data set - 13 columns of data - rowID, bookID, Title,author, average rating,isbn, (two of these), language, number of pages, rating count, text review count, publised date and then publisher.
+```{r}
+ncol(books)
+```
+```{r}
+dim(books)
+```
+# A total of 11,123 books listed in the dataset.
+
+```{r}
+names (books)
+```
+
+#running the first 10 rows to follow the lesson plan on day 2
+```{r}
+head(books,10)
+```
+```{r}
+tail(books,10)
+```
+
+
+```{r}
+glimpse(books)
+```
+
+#Love this format of the data.
+```{r}
+view(books)
+```
+
+#Practice the Select function - Going to look at some authors to see how many books they have published.
+
+
+```{r}
+
+select(books)
+  
+```
+
+```{r}
+books %>%
+  select(authors)
+```
+
+# Not - going to try and work out what is wrong with this (done an hour)
+#yipee worked it out as needed the pipe !!
+
+
+```{r}
+books %>%
+  select(authors,language_code,publication_date)
+```
+
