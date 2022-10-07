@@ -1,0 +1,162 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+drinks_content
+```
+
+Question 1.
+
+Load in the dataset (yipee did that) and have a look at it. What are the dimensions, variable types, variable names, etc.?
+10 beverage types.
+Variable types -beverage prep and type, variable names Calories
+<dbl>
+Total Fat (g)
+<chr>
+Trans Fat (g)
+<dbl>
+Saturated Fat (g)
+<dbl>
+Sodium (mg)
+Calories
+<dbl>
+Calories
+<dbl>
+Total Carbohydrates (g)
+<dbl>
+Cholesterol (mg)
+<dbl>
+Dietary Fibre (g)
+Sugars (g)
+<dbl>
+Protein (g)
+<dbl>
+Vitamin A (% DV)
+<chr>
+Vitamin C (% DV)
+Calcium (% DV)
+<chr>
+Iron (% DV)
+<chr>
+Caffeine 
+
+Question 2.
+
+Let’s first investigate the calories of different drinks. Select the variables Beverage_category, Beverage, Beverage prep and Calories from your data. Since we are interested in the calorie content, check if there are any NA values in the data, and drop them if there are.
+
+```{r}
+(drinks_content)
+```
+
+```{r}
+drinks_content
+Filter (Beverage_pre,)
+```
+
+```{r}
+library(tidyverse)
+```
+Question 1
+```{r}
+library (tidyverse)
+library(CodeClanData)
+
+```
+```{r}
+drinks_content
+```
+
+Question 2
+```{r}
+drinks_content %>%
+  select(Beverage_category, Beverage, Beverage_prep, Calories) %>%
+  filter(is.na(Calories)) %>%
+  summarise(count_of_missing_calories = n())
+```
+Question 3
+```{r}
+drink_calories <- drinks_content %>%
+  mutate(calorie_diff = Calories - 135)
+```
+Question 4
+```{r}
+most_calories <- drink_calories %>%
+  group_by(Beverage_category) %>%
+  summarise(mean_calories = mean(Calories)) %>%
+  arrange(desc(mean_calories)) %>%
+  head(3)
+
+most_calories
+```
+Quesetion 5
+```{r}
+least_calories <- drink_calories %>%
+  group_by(Beverage_category) %>%
+  summarise(mean_calories = mean(Calories)) %>%
+  arrange(mean_calories)%>%
+  head(3)
+
+least_calories
+```
+Question 6
+1 what is the average calories of all drinks
+
+```{r}
+drinks_content %>%
+  
+  summarise(mean_calories) = mean (calories)
+pull(calories)%>%
+  mean()
+```
+
+2 Which beverage prep type and a summary table that shows average calories for each type of beverage.
+
+```{r}
+drinks_content %>%
+  group_by(Beverage_prep)%>%
+  summarise(mean_cals = mean(Calories)) %>%
+  filter(mean_cals) > avg_cals_all_drinks)
+
+```
+
+```{r}
+
+```
+
+Group by
+3.Filter the summary table to only show the beverage prep type to show more than AC (average calories)
+
+```{r}
+  average_bev_prep <- drink_calories %>%
+  group_by(Beverage_prep) %>%
+  summarise(mean_cals = mean(Calories)) %>%
+  arrange(desc(mean_cals))
+
+average_bev_prep
+```
+
+```{r}
+head(drink_calories)
+```
+
+```{r}
+drink_calories %>%
+  group_by(Beverage_category, Beverage, Beverage_prep) %>%
+  summarise(min_calories = min(Calories)) %>%
+  arrange(min_calories) %>%
+  head(1)
+```
+
+Question 7
+```{r}
+head(drink_calories)
+mean(3)
+```
+
+```{r}
+drinks_content
+select(beverage_prep)
+```
+
