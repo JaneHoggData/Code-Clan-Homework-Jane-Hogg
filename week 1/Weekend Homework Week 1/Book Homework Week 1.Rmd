@@ -9,6 +9,7 @@ library(tidyverse)
 
 ```{r}
 library(CodeClanData)
+library(dbplyr)
 ```
 
 # Loaded the Data in to R and also into Computer etc.
@@ -76,3 +77,89 @@ books %>%
   select(authors,average_rating)
 ```
 #Trying to look at authors with average rating more than 3
+```{r}
+books
+```
+
+```{r}
+library(dplyr)
+
+```
+```{r}
+books
+```
+
+
+  chinesemeal%>%
+  group_by(Year) %>%
+  mutate(AnnualCalsPerDay = sum (CaloriesPerDay)) %>%
+  arrange(Year)
+```{r}
+books%>%
+group_by(authors)
+```
+#see that i can a group in the tibble that is 6639
+
+
+```{r}
+books%>%
+group_by(language_code)
+```
+
+#second table that is language code (27)
+
+```{r}
+books%>%
+group_by(publisher)
+```
+
+#can see have tabel of publishers 2290 - a lot more that expected.
+
+
+drinks_content %>%
+  select(Beverage_category, Beverage, Beverage_prep, Calories) %>%
+  filter(is.na(Calories)) %>%
+  summarise(count_of_missing_calories = n())
+
+```{r}
+library(dbplyr)
+```
+
+
+```{r}
+books %>%
+  Select(num_pages, ratings_count) %>%
+  filter(is.na (num_pages)) %>%
+  summarise(count_of_missing_pages = n())
+  
+```
+
+#Frustrated that i can't get the select function to work and have also looked at Youtube
+
+
+
+  
+```{r}
+books%>%
+    group_by(ratings_count)%>%
+  summarise(mean_rating = mean(ratings_count)) %>%
+  arrange(desc(ratings_count))
+  
+  
+ )
+```
+
+ # Not sure what I can't get the filter on this with author
+ 
+ 
+ 
+
+```{r}
+books%>%
+group_by(title)
+```
+ 
+ What did i want to do and not achieve?
+ Select and filter
+ Wanted to look at largest v smallers page numbers
+ wanted to look at any link/trend between highest rating and the number of page numbers - to answer the question what is the optimum page numbers v rating.
