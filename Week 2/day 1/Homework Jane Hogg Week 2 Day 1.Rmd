@@ -1,0 +1,24 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+cardBase <-read_csv ("5_homework/data/CardBase.csv")
+```
+```{r}
+CustomerBase <-read_csv ("5_homework/data/CustomerBase.csv")
+```
+
+```{r}
+FraudBase <-read_csv ("5_homework/data/FraudBase.csv")
+```
+
+```{r}
+TransacstionBase <-read_csv ("5_homework/data/FraudBase.csv")
+```
+
