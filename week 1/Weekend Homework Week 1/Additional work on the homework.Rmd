@@ -1,0 +1,95 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+
+```{r}
+library (tidyverse)
+```
+
+
+```{r}
+books <- read_csv("data/books.csv")
+```
+```{r}
+names(books)
+```
+```{r}
+dim (books)
+```
+```{r}
+sum(is.na(books))
+```
+```{r}
+books %>% 
+  summarise(across(.fns = ~ sum(is.na(.x))))
+```
+
+```{r}
+books <- books %>% 
+  janitor::clean_names() %>% 
+  drop_na()
+```
+
+There are no columns without data.
+
+
+
+```{r}
+  select_if(is.numeric) %>% 
+  select(book_id) %>% 
+ 
+ 
+```
+```{r}
+books %>% 
+  distinct(language_code) %>% 
+  nrow()
+```
+How many publishers?
+```{r}
+books %>% 
+  distinct(publisher) %>% 
+  nrow()
+```
+
+```{r}
+books%>%
+  glimpse()
+```
+
+```{r}
+books %>% 
+  distinct(authors) %>% 
+  nrow()
+```
+```{r}
+books%>%
+  select(authors)
+```
+
+```{r}
+books%>%
+  distinct(authors)
+```
+
+```{r}
+filter(ratings_count > 1000) %>% 
+  slice_max(average_rating, n = 5)
+```
+
+```{r}
+books%>%
+  Select(authors,num_pages)%>%
+```
+```{r}
+books%>%
+  select("authors", "num_pages")
+ 
+```
+
