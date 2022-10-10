@@ -14,11 +14,69 @@ cardBase <-read_csv ("5_homework/data/CardBase.csv")
 CustomerBase <-read_csv ("5_homework/data/CustomerBase.csv")
 ```
 
+
 ```{r}
 FraudBase <-read_csv ("5_homework/data/FraudBase.csv")
 ```
+```{r}
+dim(FraudBase)
+```
+```{r}
+names(FraudBase)
+```
+
+```{r}
+glimpse (FraudBase)
+
+```
+
+
 
 ```{r}
 TransacstionBase <-read_csv ("5_homework/data/FraudBase.csv")
+```
+```{r}
+nrow(TransacstionBase)
+  
+```
+```{r}
+ncol(TransactionBase)
+```
+#Practising the checking of the data again
+```{r}
+dim(TransactionBase)
+```
+```{r}
+names(TransactionBase)
+```
+```{r}
+Select(all_Transaction_Data) 
+
+```
+
+
+#Read in all 4 credit card transaction datasets and clean column names.
+Read in the Data.
+#Clean Column names
+
+#Loaded in Janitor to clean the columns
+
+```{r}
+library(janitor)
+```
+```{r}
+TransactionBase_janitor_clean <- TransactionBase %>%
+clean_names()
+```
+
+#Think it cleaned something.
+
+
+
+
+#Q2 - Join the data containing card details and customer details by customer id, so that all records of card details and any matching records in customer details are kept. Before you run the code, think about how many rows you expect to see after joining.
+
+```{r}
+inner_join (CardBase,"customer_ID")
 ```
 
