@@ -5,25 +5,41 @@ output: html_notebook
 
 ```{r}
 library(tidyverse)
+library(janitor)
 ```
 
 ```{r}
-cardBase <-read_csv ("5_homework/data/CardBase.csv")
+CardBase<-read_csv ("5_homework/data/CardBase.csv")%>% clean_names()
+
+CustomerBase <-read_csv ("5_homework/data/CustomerBase.csv")%>% clean_names()
+
+FraudBase <-read_csv ("5_homework/data/FraudBase.csv")%>% clean_names()
+
+TransactionBase <-read_csv("_homework/data/TransactionBase.csv") %>% clean_names()
+
+
 ```
+
 ```{r}
-CustomerBase <-read_csv ("5_homework/data/CustomerBase.csv")
+dim(CardBase)
+```
+
+```{r}
+head(CardBase)
+```
+
+```{r}
+head(TransactionBase)
+```
+
+```{r}
+left_join(card_base, customer_base, by = "cust_id")
 ```
 
 
-```{r}
-FraudBase <-read_csv ("5_homework/data/FraudBase.csv")
-```
-```{r}
-dim(FraudBase)
-```
-```{r}
-names(FraudBase)
-```
+
+
+
 
 ```{r}
 glimpse (FraudBase)
