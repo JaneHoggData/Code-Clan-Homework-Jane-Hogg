@@ -16,17 +16,13 @@ code_clan_tweets <-read_csv ("data/code_clan_tweets.csv")
 Q1 Load the code_clan_tweets.csv data. Find the number of rows, columns, and list all the variable names.
 
 ```{r}
-code_clan_tweets
+code_clan_tweets%>%
 head()
 
 ```
 ```{r}
-
-col(code_clan_tweets)
-```
-
-```{r}
-nrows()
+code_clan_tweets%>%
+nrow()
 ```
 
 
@@ -34,7 +30,7 @@ Q2 Find the total number of favourites (stored in favorite_count) that CodeClan 
 
 checking Variables Names
 ```{r}
-names(code_clan_tweets)
+names (code_clan_tweets)
 ```
 ```{r}
 glimpse (code_clan_tweets)
@@ -50,33 +46,137 @@ str(code_clan_tweets)
 ```
 
 
+
+
+#THis is where is got stuck - checked the answers
+```{r}
+code_clan_tweets%>%
+  filter(is_quote)
+
+```
+
+view (code_clan_tweets
+dim
+names
+head
+
+```{r}
+code_clan_tweets %>%
+  filter(is_quote == FALSE) %>%
+  summarise(total = sum(favorite_count))
+```
+Q3 Summarise the mean number of retweets (retweet_count), split by the type of platform that was used to tweet (source). Again, omit quoted tweets from the mean.
+summarise
+split by the type = group by
+summarise at the end and logical order of the oprations.
+
+```{r}
+
+  mean_retweets <- code_clan_tweets %>%
+  filter(is_quote == FALSE) %>%
+  group_by(source) %>%
+  summarise(average_retweet = mean(retweet_count))
+  head(mean_retweets)
+```
+
+
+Q4
+#Count the total number of likes (i.e. total of favorite_count),
+#split by media type,
+#and arrange them from most likes to least. 
+#Assume that any tweets without a listed media type are of type “text”.
+
+```{r}
+code_clan_tweets %>%
+  mutate(media_type = coalesce(media_type, "text")) %>%
+  group_by(media_type) %>%
+  summarise(favourite_count_total = sum(favorite_count)) %>%
+  arrange(desc(favourite_count_total))
+```
+
+#Q5
+
+Find the mean number of characters that a CodeClan tweet contains. You can either find a way to count the text in the text variable, or use the variable display_text_width which contains a count. Checking both would be a good idea if possible to see if they match (but it’s not essential).
+
+```{r}
+code_clan_tweets %>%
+  summarise(avg_tweet_length = mean(display_text_width))
+```
+
 ```{r}
 code_clan_tweets
 ```
 
+```{r}
+code_clan_tweets %>%
+  mutate(char_count)
+```
+
+Q6The code_clan_info.csv data file contains status_url along with other info. Load this in, and join it to the code_clan_tweets tibble, so that you have a status_url for each tweet. Decide which variable to join the tibbles on.
+
+
+
+
 
 ```{r}
 code_clan_tweets%>%
-  filter(is_quote)
-
+  count(tweet_id)
 ```
 
 ```{r}
-code_clan_tweets%>%
-  filter(is_quote)
+info <- read_csv("data/code_clan_info.csv")
+  
+  joined_tweets <- code_clan_tweets %>%
+    full_join(info,
+              by = "tweet_id")
+```
+
+```{r}
+code_clan_info
+```
+
+```{r}
+user_pattern <- "@[a-zA-Z0-9_]+"
+tweets <- codeclan_tweets %>% 
+  select(text)
+head(str_extract_all(tweets$text, user_pattern))
 ```
 ```{r}
 code_clan_tweets%>%
-  arrange(source)
+  str_count("(?i)Codeclan")
+```
+```{r}
+
+code_clan_tweets %>%
+  pattern <- "CodeClan"
+  code_clan_tweets
+  str_count()
 ```
 
 ```{r}
-code_clan_tweets%>%
-  sum (favorite_count)
-
+code_clan_tweets %>%
+  str_count("(?i)Edinburgh")
 ```
 
 
 
-Don’t add a tweet’s favorite_count to the total when the tweet was quoted (see the is_quote variable).
-Count the 
+#Extension Question 10
+
+
+```{r}
+user_pattern <- "@[a-zA-Z0-9_]+"
+tweets <- code_clan_tweets %>% 
+  select(text)
+head(str_extract_all(tweets$text, user_pattern))
+```
+
+```{r}
+code_clan_tweets %>%
+  select(text) %>%
+  mutate(user_tweeeted = str_extract_all(text, "@[A-z0-9_]+")) %>%
+  unnest(cols = c(user_tweeeted)) %>%
+  group_by(user_tweeeted) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count))
+```
+
