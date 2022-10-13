@@ -23,17 +23,25 @@ and wind speed.
 
 
 ```{r}
-weather_info <- list(
+weather_info_list <- list(
                 "Thur" = list(Temp = 13, chance_of_rain = 4, Wind_speed = 4),
                 "Fri" = list(Temp = 11, chance_of_rain = 35, wind_speed = 11),
                 "Sat" = list(Temp = 11, chance_of_rain =36, Wind_Speed = 10))
                 
 ```
+
+
 ```{r}
-weather_info
+weather_info_list
 
 ```
 #Not sure in the right format - does not look that tidy and i wanted in inn columns
+
+
+```{r}
+weather_info_list$Thur$chance_of_rain
+```
+
 
 
 <br>
@@ -44,6 +52,17 @@ Using the list you've just made find:
   i. The chance of rain tomorrow Thur 4
   
   iii. The temperature tomorrow.
+
+```{r}
+weather_info_list$Thur$Temp
+```
+#wind speed on Saturday
+
+```{r}
+weather_info_list$Sat$Temp
+```
+
+#Not correct way to do things
 
 ```{r}
 weather_info [[1]][[2]]
@@ -73,6 +92,35 @@ Find a 14 day forecast online and create a matrix of the forecasts for temperatu
 where each week is one row and columns correspond to days.
 
 You will want to give a name to the matrix you create.
+
+```{r}
+forecast_14_days_vector <- c(14L, 20L, 14L, 11L, 14L, 15L, 16L, 18L, 17L, 13L, 16L, 16L, 
+18L, 16L)
+
+forecast_14_days <- matrix(
+  forecast_14_days_vector,
+  nrow = 2,
+  ncol = 7, 
+  byrow = TRUE
+)
+
+```
+```{r}
+forecast_14_days
+```
+```{r}
+
+```
+```{r}
+cat(letters)
+```
+```{r}
+cat(letters,sep = "\tab")
+```
+```{r}
+cat(LETTERS,sep = "\n")
+```
+
 
 ```{r}c
 matrix(1:4, nrow = 2, ncol = 7)
@@ -125,7 +173,14 @@ matrix =(3)
 **Question 5.** \
 Write a function that pre-appends "The answer is: " to any character input, while for numeric input, it either just returns the number for numbers less than 10, or divides the number by 10 for numbers greater than 10. For anything else return "Invalid input".
 
+```{r}
 
+multiply_by_5 <- function(x){
+  return(x*5)
+}
+
+```
+#1.5hours and that is enough for me - bed time.
 
 
 <br>
@@ -164,7 +219,32 @@ You may want to use the function `cat()`. This is similar to `print()`, but prin
 
 For example, the vector
 `c(1, 2, 3, 4, 5, 1, 3, 4, 5, 1, 3, 4, 4, 3, 3, 3, 3)`
-should produce the histogram below - the histogram dislpays the number of times each number appears in the vector.
+should produce the histogram below - the histogram dislpays the number of times each number appears in the vector
+
+```{r}
+library(stringr)
+counts <- matrix(nrow = 9, ncol = 1)
+numbers <- sample(1:5, size = 50, replace = TRUE)
+art <- function(x){
+  for (m in 1:9){
+    counts[m] <- sum(str_count(x, pattern = as.character(m)))
+    }
+  for (num in counts) {
+    for (rep in 1:num){
+      if(num == 0){
+        break
+      }
+      cat("*")
+    }
+    if (num != 0)
+    cat("\n")
+  }
+}
+art(numbers)
+```
+
+
+
 
 ```
 1 | ***
