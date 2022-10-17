@@ -39,6 +39,23 @@ WHERE country = 'Spain';
 
 SELECT *
 FROM employees
-WHERE pay_detail_id = NULL;
+pay_detail_id
+
+--Broken this section into two - just called the pay details first.
+
+SELECT *
+FROM employees
+local_account_id
+WHERE pay_detail_id IS NOT NOT NULL;
+
+--Moving on as not really managed to stich these two functions together. Data lloks like there are recods for all employees
+
+
+--Q6Are there any pay_details records lacking both a local_account_no and iban number?
+
+--
+
+
+
 
 
