@@ -53,9 +53,60 @@ WHERE pay_detail_id IS NOT NOT NULL;
 
 --Q6Are there any pay_details records lacking both a local_account_no and iban number?
 
+SELECT *
+FROM employees
+ORDER BY pay_detail_id DESC NULLS LAST,
+local_account_id DESC NULLS  LAST;
+
+--Q7Get a table with employees first_name and last_name ordered alphabetically by last_name (put any NULLs last).
+
+
+
+SELECT ID,
+    first_name,
+    last_name 
+    FROM employees;
+
+--Split this up INTO FIRST part OF the question.
 --
 
 
 
+SELECT ID,
+    first_name,
+    last_name 
+    FROM employees
+    ORDER BY last_name ASC
+  
+
+SELECT ID,
+  first_name,
+  last_name
+FROM employees 
+WHERE first_name IS NOT NULL AND last_name IS NOT NULL
+ORDER BY last_name ASC;
+  
+--not sure got the exact correct answer to this as I think the Nul have been ommitted.
 
 
+
+--Q8Get a table of employees first_name, last_name and country, 
+--ordered alphabetically first by country and then by last_name (put any NULLs last).
+
+SELECT ID,
+  first_name,
+  last_name,
+  country 
+FROM employees 
+WHERE first_name IS NOT NULL AND last_name IS NOT NULL
+ORDER BY last_name  ASC;
+
+
+
+SELECT ID,
+  first_name,
+  last_name,
+  country 
+FROM employees 
+WHERE first_name IS NOT NULL AND last_name IS NOT NULL
+ORDER BY country  ASC;
