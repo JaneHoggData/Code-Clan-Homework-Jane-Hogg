@@ -110,3 +110,56 @@ SELECT ID,
 FROM employees 
 WHERE first_name IS NOT NULL AND last_name IS NOT NULL
 ORDER BY country  ASC;
+
+
+--Q9 Find the details of the top ten highest paid employees in the corporation.
+
+SELECT *
+FROM employees
+ORDER BY salary ASC 
+LIMIT 10
+
+--Decided TO find the lowest paid FIRST 
+
+
+SELECT *
+FROM employees
+ORDER BY salary DESC 
+LIMIT 50
+
+--returned the Null FIRST. Not sure why?? 
+
+
+--Q10 Find the first_name, last_name and salary of the lowest paid employee in Hungary.
+
+
+SELECT id 
+first_name,
+last_name,
+country ountry = 'Hungary'
+FROM employees;
+
+
+SELECT *
+FROM employees
+WHERE country = 'Hungary';
+
+  ---NOT sure there IS ONLY one person IN Hungary
+    
+
+
+--Q11 How many employees have a first_name beginning with ‘F’?
+
+
+SELECT *
+FROM employees 
+WHERE first_name = 'Alfy' 
+
+--tried this first to test the bits 
+
+SELECT *
+FROM employees 
+WHERE first_name = 'F%' 
+
+
+
