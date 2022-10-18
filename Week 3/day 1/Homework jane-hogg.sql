@@ -163,3 +163,100 @@ WHERE first_name = 'F%'
 
 
 
+SELECT 
+COUNT(id) AS num_employees_first_name_F
+FROM employees
+WHERE first_name ILIKE 'F%';
+
+
+
+--q15 Return a table containing each employees first_name, last_name, full-time equivalent hours (fte_hours),
+-- salary, 
+--and a new column effective_yearly_salary which should contain fte_hours multiplied by salary.
+
+--filter the table to only show employees with an effective yearly salary of £35k
+
+
+--good example of order of operations
+
+SELECT 
+first_name,
+last_name ,
+fte_hours ,
+salary ,
+fte_hours * salary AS effective_yearly_salary
+FROM employees
+WHERE fte_hours * salary > 35000;
+
+
+
+--Q16 The corporation wants to make name badges for a forthcoming conference. 
+--Return a column badge_label showing employees’ first_name and last_name joined together with their department in the following style:
+-- ‘Bob Smith - Legal’. Restrict output to only those employees with stored first_name, last_name and department.
+
+
+SELECT 
+    first_name,
+    last_name ,
+    department 
+FROM employees
+WHERE first_name IS NOT NULL AND last_name IS NOT NULL 
+AND department IS NOT NULL;
+
+--this is the first section of the question - but now need to join it togethetr.
+
+
+SELECT 
+    first_name,
+    last_name ,
+    department,
+    concat(first_name, '', last_name, '-', department)AS badge_label 
+FROM employees
+WHERE first_name IS NOT NULL AND
+last_name IS NOT NULL 
+AND department IS NOT NULL;
+
+
+--so this then gives the table with name and deparment
+--concatiatiaon means TO link together IN a string
+
+
+--q17 - pulling all together to then put the date in the labe.
+
+
+SELECT
+  first_name,
+  last_name,
+  department,
+  start_date,
+  CONCAT(
+    first_name, ' ', last_name, ' - ', department, 
+    ' (joined ', EXTRACT(YEAR FROM start_date), ')'
+  ) AS badge_label
+FROM employees
+WHERE 
+  first_name IS NOT NULL AND 
+  last_name IS NOT NULL AND 
+  department IS NOT NULL AND
+  start_date IS NOT NULL
+
+
+  SELECT
+  first_name,
+  last_name,
+  department,
+  start_date,
+  CONCAT(
+    first_name, ' ', last_name, ' - ', department, '_Happy Hippo',
+    ' (joined ', EXTRACT(YEAR FROM start_date), ')'
+  ) AS badge_label
+FROM employees
+WHERE 
+  first_name IS NOT NULL AND 
+  last_name IS NOT NULL AND 
+  department IS NOT NULL AND
+  start_date IS NOT NULL
+
+--where is the filtering conditions
+
+
