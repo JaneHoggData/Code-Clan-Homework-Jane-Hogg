@@ -1,0 +1,102 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+#Revision homework on key areas to better undersand.
+#list
+#select() selects columns vertically 
+#filter() + logical operators esp. (!=, ==, %in%) - works horizontally
+#& (and), | (or)
+#arrange()
+#mutate() + changing column data types
+#summarise()
+#%>% and pulling it all together
+#group_by() with summarise() and mutate()
+#pull()
+
+
+```{r}
+library(tidyverse)
+```
+```{r}
+books <- read_csv("C:/Users/44792/OneDrive/Desktop/Codeclan 2022/Code-Clan-Homework-Jane-Hogg/week 1/Weekend Homework Week 1/2_weekend_homework/data/books.csv")
+View(books)
+```
+```{r}
+books
+```
+
+```{r}
+books%>%
+select(num_pages, authors)
+```
+```{r}
+str(books)
+```
+```{r}
+books%>%
+  select(num_pages)%>%
+  filter(num_pages < 30)%>%
+  count()
+  
+```
+#Practice the select,filter and count verbs
+#indicates the number of books with less than 30 pages (a total of 305)
+#logical operations too
+
+#mutate() + changing column data types
+
+```{r}
+books%>%
+  select(num_pages,bookID)
+```
+
+#mutate() + changing column data types
+
+
+```{r}
+books%>%
+  select(num_pages,bookID,ratings_count)%>%
+  group_by(num_pages)%>%
+  mutate(num_pages, bookID =bookID*5)
+```
+
+#mutate has been used to multiply the ratings_count.  Might be useful if wanted to model an increase of a figure?
+
+
+#summarise()
+
+```{r}
+books%>%
+  summarise(authors, publication_date,publisher)
+
+```
+
+#group_by() with summarise() and mutate()
+
+```{r}
+books%>%
+  summarise(authors, publication_date,publisher)
+  mutate(authors, publisher == "crown")
+```
+~Note sure that this worked that well
+
+```{r}
+books %>%
+  filter(!is.na(language_code))%>%
+ 
+```
+
+#pull
+
+Calculate the average rating count for all books and create a new column which states TRUE if the average rating for all books is above this average
+
+```{r}
+average_ratings_count <- books %>%
+  summarise(average_rating = mean(ratings_count, na.rm = TRUE))
+  
+```
+
+#created the new variable of average rating count 17942
+
+
