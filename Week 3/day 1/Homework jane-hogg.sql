@@ -259,4 +259,6 @@ WHERE
 
 --where is the filtering conditions
 
+SELECT 
 
+FROM employees e 
