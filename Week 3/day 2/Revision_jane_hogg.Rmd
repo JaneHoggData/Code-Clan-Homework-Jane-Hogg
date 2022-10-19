@@ -43,6 +43,18 @@ books%>%
 #Practice the select,filter and count verbs
 #indicates the number of books with less than 30 pages (a total of 305)
 #logical operations too
+##count functions select = 
+
+```{r}
+
+books%>%
+  select(num_pages)%>%
+  filter(num_pages < 30)%>%
+  summarise(low_page_count = n())
+```
+##summarise groups the select and filter and then gives (if required) better title for the outcome of the data column.
+
+
 
 #mutate() + changing column data types
 
@@ -55,13 +67,40 @@ books%>%
 
 
 ```{r}
-books%>%
+(books_5 <-books%>%
   select(num_pages,bookID,ratings_count)%>%
   group_by(num_pages)%>%
-  mutate(num_pages, bookID =bookID*5)
+  mutate( bookid_5 =bookID*5))
 ```
 
 #mutate has been used to multiply the ratings_count.  Might be useful if wanted to model an increase of a figure?
+#booksid_5 < this assigns (saves this function output and it can be called again wit not needs to write the code)
+##place the assigned bookis_5 with a () an output to see.
+
+
+
+```{r}
+(books_5 <-books%>%
+  select(num_pages,bookID,ratings_count)%>%
+  group_by(num_pages)%>%
+  mutate( bookid_5 =bookID*5, .after = "bookID"))
+```
+
+##placing the mutate function with .after = the column you have mutated.
+##can also use .before 
+
+```{r}
+(books_5 <-books%>%
+  select(num_pages,bookID,ratings_count)%>%
+  group_by(num_pages)%>%
+  mutate( bookid_5 =bookID*5, .after = "bookID"))%>%
+  mutate(num_pages = as.integer(num_pages))
+```
+
+##process above changes the type of date and into an interger.
+##interger = from a double (and this column is only going to have whole numbers)
+##changing the data type can be helpful in later stages of the course.
+
 
 
 #summarise()
@@ -79,7 +118,9 @@ books%>%
   summarise(authors, publication_date,publisher)
   mutate(authors, publisher == "crown")
 ```
-~Note sure that this worked that well
+###Note sure that this worked that well
+##sumarise - usually looking for a mathimatical aggregation of the date
+##group by
 
 ```{r}
 books %>%
@@ -92,10 +133,15 @@ books %>%
 Calculate the average rating count for all books and create a new column which states TRUE if the average rating for all books is above this average
 
 ```{r}
-average_ratings_count <- books %>%
-  summarise(average_rating = mean(ratings_count, na.rm = TRUE))
-  
+books%>%
+mutate(average_ratings_count = if_else
+       (ratings_count > mean(ratings_count), TRUE, FALSE),
+       .after = ratings_count)
+
 ```
+##add a extra () at beginning and end gives you an output
+##if else within a mutate function
+##when see create new column need to mutate
 
 #created the new variable of average rating count 17942
 
