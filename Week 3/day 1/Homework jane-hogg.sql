@@ -46,50 +46,29 @@ pay_detail_id
 SELECT *
 FROM employees
 local_account_id
-WHERE pay_detail_id IS NOT NOT NULL;
+WHERE pay_detail_id IS NOT NULL;
 
---Moving on as not really managed to stich these two functions together. Data lloks like there are recods for all employees
+--updated this homework on 19.10.2022 and completed question 5
 
 
 --Q6Are there any pay_details records lacking both a local_account_no and iban number?
 
-SELECT *
-FROM employees
-ORDER BY pay_detail_id DESC NULLS LAST,
-local_account_id DESC NULLS  LAST;
+SELECT 
+  COUNT(id) AS num_pay_details_no_local_acct_iban
+FROM pay_details
+WHERE local_account_no IS NULL AND iban IS NULL
+
 
 --Q7Get a table with employees first_name and last_name ordered alphabetically by last_name (put any NULLs last).
-
-
-
-SELECT ID,
-    first_name,
-    last_name 
-    FROM employees;
-
---Split this up INTO FIRST part OF the question.
---
-
 
 
 SELECT ID,
     first_name,
     last_name 
     FROM employees
-    ORDER BY last_name ASC
+    ORDER BY last_name ASC;
+
   
-
-SELECT ID,
-  first_name,
-  last_name
-FROM employees 
-WHERE first_name IS NOT NULL AND last_name IS NOT NULL
-ORDER BY last_name ASC;
-  
---not sure got the exact correct answer to this as I think the Nul have been ommitted.
-
-
-
 --Q8Get a table of employees first_name, last_name and country, 
 --ordered alphabetically first by country and then by last_name (put any NULLs last).
 
@@ -101,15 +80,6 @@ FROM employees
 WHERE first_name IS NOT NULL AND last_name IS NOT NULL
 ORDER BY last_name  ASC;
 
-
-
-SELECT ID,
-  first_name,
-  last_name,
-  country 
-FROM employees 
-WHERE first_name IS NOT NULL AND last_name IS NOT NULL
-ORDER BY country  ASC;
 
 
 --Q9 Find the details of the top ten highest paid employees in the corporation.
@@ -128,7 +98,12 @@ ORDER BY salary DESC
 LIMIT 50
 
 --returned the Null FIRST. Not sure why?? 
+--fixed this now.
 
+SELECT *
+FROM employees
+ORDER BY salary DESC NULLS LAST
+LIMIT 10
 
 --Q10 Find the first_name, last_name and salary of the lowest paid employee in Hungary.
 
@@ -136,7 +111,7 @@ LIMIT 50
 SELECT id 
 first_name,
 last_name,
-country ountry = 'Hungary'
+country = 'Hungary'
 FROM employees;
 
 
@@ -144,9 +119,18 @@ SELECT *
 FROM employees
 WHERE country = 'Hungary';
 
-  ---NOT sure there IS ONLY one person IN Hungary
-    
+---NOT sure there IS ONLY one person IN Hungary
+--fixed this now.
 
+    
+SELECT 
+  first_name, 
+  last_name, 
+  salary
+FROM employees
+WHERE country = 'Hungary'
+ORDER BY salary ASC NULLS LAST
+LIMIT 1
 
 --Q11 How many employees have a first_name beginning with ‘F’?
 
@@ -156,11 +140,7 @@ FROM employees
 WHERE first_name = 'Alfy' 
 
 --tried this first to test the bits 
-
-SELECT *
-FROM employees 
-WHERE first_name = 'F%' 
-
+--fixed this now to get the right outcome
 
 
 SELECT 
@@ -218,7 +198,7 @@ AND department IS NOT NULL;
 
 
 --so this then gives the table with name and deparment
---concatiatiaon means TO link together IN a string
+--concatiatiaon needs TO link together IN a string
 
 
 --q17 - pulling all together to then put the date in the labe.
@@ -255,10 +235,8 @@ WHERE
   first_name IS NOT NULL AND 
   last_name IS NOT NULL AND 
   department IS NOT NULL AND
-  start_date IS NOT NULL
+  start_date IS NOT NULL;
 
 --where is the filtering conditions
 
-SELECT 
 
-FROM employees e 
