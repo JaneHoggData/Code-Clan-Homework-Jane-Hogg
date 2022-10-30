@@ -8,14 +8,18 @@ You might find misspellings in the data
 #Is this relevant to the questions?
 
 Outliers - some data might be either too high or too low.
+#Not sure how we would be able to check this?
 
 Some of the data might be the wrong type
 
 There might be duplicate values
+
 Be aware that ISO values for countries should always be three characters.
+#Questions do not require us to selelct by the iso so not required to clean this or check the number of letters.
 
 How are you going to deal with the missing values?
 ##When we take all the na/missing values out it reduces the obs from 12397 to 460 - impacts significantly on the dataset.
+#When looking at total deaths it is best to simply leave them in but not sure if further work required on the na when we start to summarise the data set.
 ##Would be better to replace this valyue with zero.
 
 
@@ -29,6 +33,9 @@ Q1 What was the greatest disaster of all time by total deaths?
 # 1932 Russian Famine with an estimated death toll of 5m people.
 
 Q2 Which country has had the highest total people affected by disasters?
+#Not all this data is complete - e,g the data from Russian does not include total effected. Just total deaths.
+#Tested the data for those with na - 3825 obs are then ommmitted from the dataset.
+##China has had the highest number of people affected with 
 
 Q3What are the top 5 countries for total number of disasters?
 
