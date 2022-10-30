@@ -38,9 +38,28 @@ TotalDeathsclean <-disasters_with_errors%>%
 
 Total_deathclean
 
-comms_data %>% 
-  filter(is.na(monthly_charges))
-summarise(1:10)
+#simple view of this data does give me the answer to the question 1
+
+view(TotalDeathsclean)
+
+#Further code required to list only the top ten deaths - provides the result
+## Earthquake in Indonesia in 2004 resulting in 165,816 deaths
+## But review of the clean data shows that there are further disasters that
+##with higher death toll.  Return to this later in the day.
+Finaltop_tenDeaths <-TotalDeathsclean%>%
+  arrange(desc(total_deaths))%>%
+  head(10)
+          
+  
+  
+
+
+
+
+
+
+ 
+
 
 ## Parsed with column specification:
 ## cols(

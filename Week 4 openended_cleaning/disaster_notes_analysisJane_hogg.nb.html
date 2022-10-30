@@ -1768,31 +1768,26 @@ pre code {
 
 
 <!-- rnb-text-begin -->
-<p>This is an <a href="http://rmarkdown.rstudio.com">R Markdown</a>
-Notebook. When you execute code within the notebook, the results appear
-beneath the code.</p>
-<p>Try executing this chunk by clicking the <em>Run</em> button within
-the chunk or by placing your cursor inside it and pressing
-<em>Ctrl+Shift+Enter</em>.</p>
+<div id="cleaning" class="section level2">
+<h2>Cleaning</h2>
+<p>You might find misspellings in the data Outliers - some data might be
+either too high or too low. Some of the data might be the wrong type
+There might be duplicate values Be aware that ISO values for countries
+should always be three characters. How are you going to deal with the
+missing values?</p>
+<div id="section" class="section level3">
+<h3></h3>
+<p>Q1 What was the greatest disaster of all time by total deaths?</p>
+<p>Which country has had the highest total people affected by disasters?
+What are the top 5 countries for total number of disasters? What is the
+greatest disaster in the last 5 years of the data, by total deaths? What
+were the top 10 years that had the most people dying from
+earthquakes?</p>
 <!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxvdChjYXJzKVxuYGBgIn0= -->
-<pre class="r"><code>plot(cars)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the
-toolbar or by pressing <em>Ctrl+Alt+I</em>.</p>
-<p>When you save the notebook, an HTML file containing the code and
-output will be saved alongside it (click the <em>Preview</em> button or
-press <em>Ctrl+Shift+K</em> to preview the HTML file).</p>
-<p>The preview shows you a rendered HTML copy of the contents of the
-editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not
-run any R code chunks. Instead, the output of the chunk when it was last
-run in the editor is displayed.</p>
-<!-- rnb-text-end -->
+</div>
+</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLiANCg0KVHJ5IGV4ZWN1dGluZyB0aGlzIGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqUnVuKiBidXR0b24gd2l0aGluIHRoZSBjaHVuayBvciBieSBwbGFjaW5nIHlvdXIgY3Vyc29yIGluc2lkZSBpdCBhbmQgcHJlc3NpbmcgKkN0cmwrU2hpZnQrRW50ZXIqLiANCg0KYGBge3J9DQpwbG90KGNhcnMpDQpgYGANCg0KQWRkIGEgbmV3IGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqSW5zZXJ0IENodW5rKiBidXR0b24gb24gdGhlIHRvb2xiYXIgb3IgYnkgcHJlc3NpbmcgKkN0cmwrQWx0K0kqLg0KDQpXaGVuIHlvdSBzYXZlIHRoZSBub3RlYm9vaywgYW4gSFRNTCBmaWxlIGNvbnRhaW5pbmcgdGhlIGNvZGUgYW5kIG91dHB1dCB3aWxsIGJlIHNhdmVkIGFsb25nc2lkZSBpdCAoY2xpY2sgdGhlICpQcmV2aWV3KiBidXR0b24gb3IgcHJlc3MgKkN0cmwrU2hpZnQrSyogdG8gcHJldmlldyB0aGUgSFRNTCBmaWxlKS4NCg0KVGhlIHByZXZpZXcgc2hvd3MgeW91IGEgcmVuZGVyZWQgSFRNTCBjb3B5IG9mIHRoZSBjb250ZW50cyBvZiB0aGUgZWRpdG9yLiBDb25zZXF1ZW50bHksIHVubGlrZSAqS25pdCosICpQcmV2aWV3KiBkb2VzIG5vdCBydW4gYW55IFIgY29kZSBjaHVua3MuIEluc3RlYWQsIHRoZSBvdXRwdXQgb2YgdGhlIGNodW5rIHdoZW4gaXQgd2FzIGxhc3QgcnVuIGluIHRoZSBlZGl0b3IgaXMgZGlzcGxheWVkLg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQojIyBDbGVhbmluZw0KWW91IG1pZ2h0IGZpbmQgbWlzc3BlbGxpbmdzIGluIHRoZSBkYXRhDQpPdXRsaWVycyAtIHNvbWUgZGF0YSBtaWdodCBiZSBlaXRoZXIgdG9vIGhpZ2ggb3IgdG9vIGxvdy4NClNvbWUgb2YgdGhlIGRhdGEgbWlnaHQgYmUgdGhlIHdyb25nIHR5cGUNClRoZXJlIG1pZ2h0IGJlIGR1cGxpY2F0ZSB2YWx1ZXMNCkJlIGF3YXJlIHRoYXQgSVNPIHZhbHVlcyBmb3IgY291bnRyaWVzIHNob3VsZCBhbHdheXMgYmUgdGhyZWUgY2hhcmFjdGVycy4NCkhvdyBhcmUgeW91IGdvaW5nIHRvIGRlYWwgd2l0aCB0aGUgbWlzc2luZyB2YWx1ZXM/DQoNCg0KDQoNCg0KIyMjIA0KDQpRMSBXaGF0IHdhcyB0aGUgZ3JlYXRlc3QgZGlzYXN0ZXIgb2YgYWxsIHRpbWUgYnkgdG90YWwgZGVhdGhzPw0KDQpXaGljaCBjb3VudHJ5IGhhcyBoYWQgdGhlIGhpZ2hlc3QgdG90YWwgcGVvcGxlIGFmZmVjdGVkIGJ5IGRpc2FzdGVycz8NCldoYXQgYXJlIHRoZSB0b3AgNSBjb3VudHJpZXMgZm9yIHRvdGFsIG51bWJlciBvZiBkaXNhc3RlcnM/DQpXaGF0IGlzIHRoZSBncmVhdGVzdCBkaXNhc3RlciBpbiB0aGUgbGFzdCA1IHllYXJzIG9mIHRoZSBkYXRhLCBieSB0b3RhbCBkZWF0aHM/DQpXaGF0IHdlcmUgdGhlIHRvcCAxMCB5ZWFycyB0aGF0IGhhZCB0aGUgbW9zdCBwZW9wbGUgZHlpbmcgZnJvbSBlYXJ0aHF1YWtlcz8=</div>
 
 
 
