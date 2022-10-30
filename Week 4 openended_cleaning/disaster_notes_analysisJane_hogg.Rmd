@@ -5,11 +5,18 @@ output: html_notebook
 
 ## Cleaning
 You might find misspellings in the data
+#Is this relevant to the questions?
+
 Outliers - some data might be either too high or too low.
+
 Some of the data might be the wrong type
+
 There might be duplicate values
 Be aware that ISO values for countries should always be three characters.
+
 How are you going to deal with the missing values?
+##When we take all the na/missing values out it reduces the obs from 12397 to 460 - impacts significantly on the dataset.
+##Would be better to replace this valyue with zero.
 
 
 
@@ -19,7 +26,12 @@ How are you going to deal with the missing values?
 
 Q1 What was the greatest disaster of all time by total deaths?
 
-Which country has had the highest total people affected by disasters?
-What are the top 5 countries for total number of disasters?
-What is the greatest disaster in the last 5 years of the data, by total deaths?
+# 1932 Russian Famine with an estimated death toll of 5m people.
+
+Q2 Which country has had the highest total people affected by disasters?
+
+Q3What are the top 5 countries for total number of disasters?
+
+Q4What is the greatest disaster in the last 5 years of the data, by total deaths?
+
 What were the top 10 years that had the most people dying from earthquakes?
