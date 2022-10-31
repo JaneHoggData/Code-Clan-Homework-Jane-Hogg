@@ -30,16 +30,35 @@ CodeClanData::qb_revenue_breakdown
 ```
 
 ```{r}
-CodeClanData::qb_revenue_breakdown%>%
-    ggplot(qb_revenue_breakdown =, aes( x = product, y = year))+
-  geom_bar(aes(x=Product, y = year))
+qb_revenue_breakdown%>%
+     ggplot(aes( x = Product, y = Year, fill= Revenue))+
+  aes(x=Product, y = Year)+
+labs(x= 'Product', y = 'Year',
+       title = 'Revenue Breakdown By Product Type and Year',
+       subtitle = 'subtitle',
+       fill= 'some title',
+       caption = 'Sales Team')
+   
+```
+## Actually managed to get the x/y axis resolved
+##Got titles in and captions.
+
+
+```{r}
+qb_revenue_breakdown%>%
+     ggplot(aes( x = Revenue, y = Product, fill= Year))+
+  aes(x=Revenue, y = Product)+
+  geom_col()
+labs(x= 'Revenue', y = 'Product',
+       title = 'Revenue Breakdown By Product Type and Year',
+       subtitle = 'subtitle',
+       fill= 'some title',
+       caption = 'Sales Team')
 ```
 
+##REvenue data needs to be placed in the ggplot
+## Finally managed to get this completed - took a long time to complete this but got there is the end.
 
-
-
-ggplot(students) +
-  geom_bar(aes(x = superpower, fill = school_year), position = "dodge")
 
 ```{r}
 qb_revenue_breakdown%>%
@@ -58,15 +77,6 @@ students%>%
 
 
 
-
-
-```{r}
-CodeClanData::qb_monthly_sales
-```
-
-```{r}
-CodeClanData::qb_device_data
-```
 
 
 
