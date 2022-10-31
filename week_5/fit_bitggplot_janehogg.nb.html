@@ -1768,31 +1768,138 @@ pre code {
 
 
 <!-- rnb-text-begin -->
-<p>This is an <a href="http://rmarkdown.rstudio.com">R Markdown</a>
-Notebook. When you execute code within the notebook, the results appear
-beneath the code.</p>
-<p>Try executing this chunk by clicking the <em>Run</em> button within
-the chunk or by placing your cursor inside it and pressing
-<em>Ctrl+Shift+Enter</em>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxvdChjYXJzKVxuYGBgIn0= -->
-<pre class="r"><code>plot(cars)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5zdGFsbC5wYWNrYWdlcygnd2VzYW5kZXJzb24nKVxuYGBgIn0= -->
+<pre class="r"><code>install.packages(&#39;wesanderson&#39;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV0FSTklORzogUnRvb2xzIGlzIHJlcXVpcmVkIHRvIGJ1aWxkIFIgcGFja2FnZXMgYnV0IGlzIG5vdCBjdXJyZW50bHkgaW5zdGFsbGVkLiBQbGVhc2UgZG93bmxvYWQgYW5kIGluc3RhbGwgdGhlIGFwcHJvcHJpYXRlIHZlcnNpb24gb2YgUnRvb2xzIGJlZm9yZSBwcm9jZWVkaW5nOlxuXG5odHRwczovL2NyYW4ucnN0dWRpby5jb20vYmluL3dpbmRvd3MvUnRvb2xzL1xuSW5zdGFsbGluZyBwYWNrYWdlIGludG8g4oCYQzovVXNlcnMvNDQ3OTIvQXBwRGF0YS9Mb2NhbC9SL3dpbi1saWJyYXJ5LzQuMuKAmVxuKGFzIOKAmGxpYuKAmSBpcyB1bnNwZWNpZmllZClcbnRyeWluZyBVUkwgJ2h0dHBzOi8vY3Jhbi5yc3R1ZGlvLmNvbS9iaW4vd2luZG93cy9jb250cmliLzQuMi93ZXNhbmRlcnNvbl8wLjMuNi56aXAnXG5Db250ZW50IHR5cGUgJ2FwcGxpY2F0aW9uL3ppcCcgbGVuZ3RoIDIxNjI1IGJ5dGVzICgyMSBLQilcbmRvd25sb2FkZWQgMjEgS0JcbiJ9 -->
+<pre><code>WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+Installing package into ‘C:/Users/44792/AppData/Local/R/win-library/4.2’
+(as ‘lib’ is unspecified)
+trying URL &#39;https://cran.rstudio.com/bin/windows/contrib/4.2/wesanderson_0.3.6.zip&#39;
+Content type &#39;application/zip&#39; length 21625 bytes (21 KB)
+downloaded 21 KB</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoicGFja2FnZSDigJh3ZXNhbmRlcnNvbuKAmSBzdWNjZXNzZnVsbHkgdW5wYWNrZWQgYW5kIE1ENSBzdW1zIGNoZWNrZWRcblxuVGhlIGRvd25sb2FkZWQgYmluYXJ5IHBhY2thZ2VzIGFyZSBpblxuXHRDOlxcVXNlcnNcXDQ0NzkyXFxBcHBEYXRhXFxMb2NhbFxcVGVtcFxcUnRtcDhDa2JOSVxcZG93bmxvYWRlZF9wYWNrYWdlc1xuIn0= -->
+<pre><code>package ‘wesanderson’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+    C:\Users\44792\AppData\Local\Temp\Rtmp8CkbNI\downloaded_packages</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5kZXZ0b29sczo6aW5zdGFsbF9naXRodWIoJ2JiYy9iYnBsb3QnKVxuYGBgIn0= -->
+<pre class="r"><code>
+devtools::install_github(&#39;bbc/bbplot&#39;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV0FSTklORzogUnRvb2xzIGlzIHJlcXVpcmVkIHRvIGJ1aWxkIFIgcGFja2FnZXMsIGJ1dCBpcyBub3QgY3VycmVudGx5IGluc3RhbGxlZC5cblxuUGxlYXNlIGRvd25sb2FkIGFuZCBpbnN0YWxsIFJ0b29scyA0LjIgZnJvbSBodHRwczovL2NyYW4uci1wcm9qZWN0Lm9yZy9iaW4vd2luZG93cy9SdG9vbHMvIG9yIGh0dHBzOi8vd3d3LnItcHJvamVjdC5vcmcvbm9zdm4vd2ludXRmOC91Y3J0My8uXG5Ta2lwcGluZyBpbnN0YWxsIG9mICdiYnBsb3QnIGZyb20gYSBnaXRodWIgcmVtb3RlLCB0aGUgU0hBMSAoODJhZjU5NTIpIGhhcyBub3QgY2hhbmdlZCBzaW5jZSBsYXN0IGluc3RhbGwuXG4gIFVzZSBgZm9yY2UgPSBUUlVFYCB0byBmb3JjZSBpbnN0YWxsYXRpb25cbiJ9 -->
+<pre><code>WARNING: Rtools is required to build R packages, but is not currently installed.
+
+Please download and install Rtools 4.2 from https://cran.r-project.org/bin/windows/Rtools/ or https://www.r-project.org/nosvn/winutf8/ucrt3/.
+Skipping install of &#39;bbplot&#39; from a github remote, the SHA1 (82af5952) has not changed since last install.
+  Use `force = TRUE` to force installation</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
+<pre class="r"><code>library(tidyverse)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the
-toolbar or by pressing <em>Ctrl+Alt+I</em>.</p>
-<p>When you save the notebook, an HTML file containing the code and
-output will be saved alongside it (click the <em>Preview</em> button or
-press <em>Ctrl+Shift+K</em> to preview the HTML file).</p>
-<p>The preview shows you a rendered HTML copy of the contents of the
-editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not
-run any R code chunks. Instead, the output of the chunk when it was last
-run in the editor is displayed.</p>
+<div id="load-in-the-data-from-the-codeclan-folder." class="section level2">
+<h2>Load in the data from the codeclan folder.</h2>
+<p>##Rewview</p>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5saWJyYXJ5KENvZGVDbGFuRGF0YSlcbmBgYCJ9 -->
+<pre class="r"><code>
+library(CodeClanData)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYQ29kZUNsYW5EYXRh4oCZXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0IGlzIG1hc2tlZCBmcm9tIOKAmHBhY2thZ2U6ZHBseXLigJk6XG5cbiAgICBzdGFyd2Fyc1xuXG5UaGUgZm9sbG93aW5nIG9iamVjdCBpcyBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOnRpZHly4oCZOlxuXG4gICAgcG9wdWxhdGlvblxuIn0= -->
+<pre><code>
+Attaching package: ‘CodeClanData’
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLiANCg0KVHJ5IGV4ZWN1dGluZyB0aGlzIGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqUnVuKiBidXR0b24gd2l0aGluIHRoZSBjaHVuayBvciBieSBwbGFjaW5nIHlvdXIgY3Vyc29yIGluc2lkZSBpdCBhbmQgcHJlc3NpbmcgKkN0cmwrU2hpZnQrRW50ZXIqLiANCg0KYGBge3J9DQpwbG90KGNhcnMpDQpgYGANCg0KQWRkIGEgbmV3IGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqSW5zZXJ0IENodW5rKiBidXR0b24gb24gdGhlIHRvb2xiYXIgb3IgYnkgcHJlc3NpbmcgKkN0cmwrQWx0K0kqLg0KDQpXaGVuIHlvdSBzYXZlIHRoZSBub3RlYm9vaywgYW4gSFRNTCBmaWxlIGNvbnRhaW5pbmcgdGhlIGNvZGUgYW5kIG91dHB1dCB3aWxsIGJlIHNhdmVkIGFsb25nc2lkZSBpdCAoY2xpY2sgdGhlICpQcmV2aWV3KiBidXR0b24gb3IgcHJlc3MgKkN0cmwrU2hpZnQrSyogdG8gcHJldmlldyB0aGUgSFRNTCBmaWxlKS4NCg0KVGhlIHByZXZpZXcgc2hvd3MgeW91IGEgcmVuZGVyZWQgSFRNTCBjb3B5IG9mIHRoZSBjb250ZW50cyBvZiB0aGUgZWRpdG9yLiBDb25zZXF1ZW50bHksIHVubGlrZSAqS25pdCosICpQcmV2aWV3KiBkb2VzIG5vdCBydW4gYW55IFIgY29kZSBjaHVua3MuIEluc3RlYWQsIHRoZSBvdXRwdXQgb2YgdGhlIGNodW5rIHdoZW4gaXQgd2FzIGxhc3QgcnVuIGluIHRoZSBlZGl0b3IgaXMgZGlzcGxheWVkLg0K</div>
+The following object is masked from ‘package:dplyr’:
+
+    starwars
+
+The following object is masked from ‘package:tidyr’:
+
+    population</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>##MVP Part 1 ##Q1 Take the data in the dataset qb_revenue_breakdown
+and make a stacked bar chart showing the sources of revenue across the
+two years in the dataset.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQ29kZUNsYW5EYXRhOjpxYl9yZXZlbnVlX2JyZWFrZG93blxuYGBgIn0= -->
+<pre class="r"><code>CodeClanData::qb_revenue_breakdown</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6OCwibmNvbCI6Mywic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbOCDDlyAzXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJxMVN2VTRDUVJDZSt4TTRBekV4OXJ3QUY1VUdPMHlJbFlVQmpGZ3V5eUlYamwzYzNVTUxDK0lMR0Z2ZndjVEMzbGdZM3dyZHU5MGwzdFZlTXBtWmIrZnZtN2wrYjlRT1J5RUFlT0M3RG5pQk1pRzRISjYxT3FBUTVUamdReTNUOXlwb1A0OEUyRk5TTlEvVklVZDRUcmd3Zm4yd1FGdzJyNURFTTJMQjNWT01pUkNNeDF2b1lKQ09CZWJ4VXNhTU5nZUVyMks4ZmZ6bm91RFY4NGtCM0pJNFJTbFEza25JaWlUQzhIVU42aDhmSG5YKzJDZWxyQUFuU05pa2Jha3B3cEp4WlcyVU5MSmh1cC9QMmJLaCszMjd6dlg3by9aZno3WCs2R245OWFEMTI0dldUelBRWDdFdFJRdGkyM29HckZ4d05rbXh0T05lRThUdFUxK1JveWtwbGFseGRoZlpVdG5TM0xWdVZ0V0IzaytKV1RoQkVrVlRybEkwdTBLNUNzc3ZvWXE1MmI4VGxKSWRYZ0wyVXBvMW43VHdMS1h6VnJ1ZGRURG5BVE9SWTA1cGJVLzM5TzFrZ2QwNW9UY3hKWFkvQ1JxVHhEZ054VEluR1MxNVRPMTZRb1dLU0RLSmJGeUlXV0lSZmJyTkwvdkRTeU16QXdBQSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Product"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Year"],"name":[2],"type":["fctr"],"align":["left"]},{"label":["Revenue"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Trackers","2":"2019","3":"8994"},{"1":"Smart Watches","2":"2019","3":"12003"},{"1":"Accessories","2":"2019","3":"5250"},{"1":"Subscription Services","2":"2019","3":"3750"},{"1":"Trackers","2":"2018","3":"8004"},{"1":"Smart Watches","2":"2018","3":"11000"},{"1":"Accessories","2":"2018","3":"4250"},{"1":"Subscription Services","2":"2018","3":"1005"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[8]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQ29kZUNsYW5EYXRhOjpxYl9yZXZlbnVlX2JyZWFrZG93biU+JVxuICAgIGdncGxvdChxYl9yZXZlbnVlX2JyZWFrZG93biA9LCBhZXMoIHggPSBwcm9kdWN0LCB5ID0geWVhcikpK1xuICBnZW9tX2JhcihhZXMoeD1Qcm9kdWN0LCB5ID0geWVhcikpXG5gYGAifQ== -->
+<pre class="r"><code>CodeClanData::qb_revenue_breakdown%&gt;%
+    ggplot(qb_revenue_breakdown =, aes( x = product, y = year))+
+  geom_bar(aes(x=Product, y = year))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gRlVOKFhbW2ldXSwgLi4uKSA6IG9iamVjdCAneWVhcicgbm90IGZvdW5kXG4ifQ== -->
+<pre><code>Error in FUN(X[[i]], ...) : object &#39;year&#39; not found</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-plot-begin eyJoZWlnaHQiOjQzMi42MzI5LCJ3aWR0aCI6NzAwLCJzaXplX2JlaGF2aW9yIjowLCJjb25kaXRpb25zIjpbXX0= -->
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArwAAAGwCAMAAAB8TkaXAAAAA1BMVEX///+nxBvIAAAACXBIWXMAAA7DAAAOwwHHb6hkAAABPElEQVR4nO3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwafLAABhydcUAAAAABJRU5ErkJggg==" /></p>
+<!-- rnb-plot-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>ggplot(students) + geom_bar(aes(x = superpower, fill = school_year),
+position = “dodge”)</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucWJfcmV2ZW51ZV9icmVha2Rvd24lPiVcbiAgc2VsZWN0KFByb2R1Y3QsIFllYXIpXG5gYGAifQ== -->
+<pre class="r"><code>qb_revenue_breakdown%&gt;%
+  select(Product, Year)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gc2VsZWN0KC4sIFByb2R1Y3QsIFllYXIpIDogXG4gIG9iamVjdCAncWJfcmV2ZW51ZV9icmVha2Rvd24nIG5vdCBmb3VuZFxuIn0= -->
+<pre><code>Error in select(., Product, Year) : 
+  object &#39;qb_revenue_breakdown&#39; not found</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>students%&gt;% select(school_year, superpower)%&gt;% ggplot(aes(x =
+superpower, fill = school_year))+ geom_bar(stat = ‘count’)</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQ29kZUNsYW5EYXRhOjpxYl9tb250aGx5X3NhbGVzXG5gYGAifQ== -->
+<pre class="r"><code>CodeClanData::qb_monthly_sales</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQ29kZUNsYW5EYXRhOjpxYl9kZXZpY2VfZGF0YVxuYGBgIn0= -->
+<pre class="r"><code>CodeClanData::qb_device_data</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpgYGB7cn0NCmluc3RhbGwucGFja2FnZXMoJ3dlc2FuZGVyc29uJykNCmBgYA0KYGBge3J9DQoNCmRldnRvb2xzOjppbnN0YWxsX2dpdGh1YignYmJjL2JicGxvdCcpDQpgYGANCg0KYGBge3J9DQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCmBgYA0KDQojIyBMb2FkIGluIHRoZSBkYXRhIGZyb20gdGhlIGNvZGVjbGFuIGZvbGRlci4NCiMjUmV3dmlldw0KYGBge3J9DQoNCmxpYnJhcnkoQ29kZUNsYW5EYXRhKQ0KDQpgYGANCg0KIyNNVlAgUGFydCAxDQojI1ExIFRha2UgdGhlIGRhdGEgaW4gdGhlIGRhdGFzZXQgcWJfcmV2ZW51ZV9icmVha2Rvd24gYW5kIG1ha2UgYSBzdGFja2VkIGJhciBjaGFydCBzaG93aW5nIHRoZSBzb3VyY2VzIG9mIHJldmVudWUgYWNyb3NzIHRoZSB0d28geWVhcnMgaW4gdGhlIGRhdGFzZXQuDQpgYGB7cn0NCkNvZGVDbGFuRGF0YTo6cWJfcmV2ZW51ZV9icmVha2Rvd24NCmBgYA0KDQpgYGB7cn0NCkNvZGVDbGFuRGF0YTo6cWJfcmV2ZW51ZV9icmVha2Rvd24lPiUNCiAgICBnZ3Bsb3QocWJfcmV2ZW51ZV9icmVha2Rvd24gPSwgYWVzKCB4ID0gcHJvZHVjdCwgeSA9IHllYXIpKSsNCiAgZ2VvbV9iYXIoYWVzKHg9UHJvZHVjdCwgeSA9IHllYXIpKQ0KYGBgDQoNCg0KDQoNCmdncGxvdChzdHVkZW50cykgKw0KICBnZW9tX2JhcihhZXMoeCA9IHN1cGVycG93ZXIsIGZpbGwgPSBzY2hvb2xfeWVhciksIHBvc2l0aW9uID0gImRvZGdlIikNCg0KYGBge3J9DQpxYl9yZXZlbnVlX2JyZWFrZG93biU+JQ0KICBzZWxlY3QoUHJvZHVjdCwgWWVhcikNCg0KDQoNCmBgYA0Kc3R1ZGVudHMlPiUNCiAgc2VsZWN0KHNjaG9vbF95ZWFyLCBzdXBlcnBvd2VyKSU+JQ0KICBnZ3Bsb3QoYWVzKHggPSBzdXBlcnBvd2VyLCBmaWxsID0gc2Nob29sX3llYXIpKSsNCiAgZ2VvbV9iYXIoc3RhdCA9ICdjb3VudCcpDQoNCg0KDQoNCg0KDQoNCg0KYGBge3J9DQpDb2RlQ2xhbkRhdGE6OnFiX21vbnRobHlfc2FsZXMNCmBgYA0KDQpgYGB7cn0NCkNvZGVDbGFuRGF0YTo6cWJfZGV2aWNlX2RhdGENCmBgYA0KDQoNCg0KDQo=</div>
 
 
 

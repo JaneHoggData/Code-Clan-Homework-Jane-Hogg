@@ -18,18 +18,32 @@ library(tidyverse)
 ## Load in the data from the codeclan folder.
 ##Rewview
 ```{r}
-CodeClanData::qb_competitors
 
+library(CodeClanData)
 
 ```
 
-
+##MVP Part 1
+##Q1 Take the data in the dataset qb_revenue_breakdown and make a stacked bar chart showing the sources of revenue across the two years in the dataset.
 ```{r}
 CodeClanData::qb_revenue_breakdown
 ```
+
+```{r}
+CodeClanData::qb_revenue_breakdown%>%
+    ggplot(qb_revenue_breakdown =, aes( x = product, y = year))+
+  geom_bar(aes(x=Product, y = year))
+```
+
+
+
+
+ggplot(students) +
+  geom_bar(aes(x = superpower, fill = school_year), position = "dodge")
+
 ```{r}
 qb_revenue_breakdown%>%
-  select(Product, Year)%>%
+  select(Product, Year)
 
 
 
