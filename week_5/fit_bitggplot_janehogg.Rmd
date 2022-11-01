@@ -13,6 +13,7 @@ devtools::install_github('bbc/bbplot')
 
 ```{r}
 library(tidyverse)
+library(dplyr)
 ```
 
 ## Load in the data from the codeclan folder.
@@ -30,19 +31,28 @@ CodeClanData::qb_revenue_breakdown
 ```
 
 ```{r}
-qb_revenue_breakdown%>%
-     ggplot(aes( x = Product, y = Year, fill= Revenue))+
-  aes(x=Product, y = Year)+
-labs(x= 'Product', y = 'Year',
-       title = 'Revenue Breakdown By Product Type and Year',
+ggplot(qb_revenue_breakdown)+
+  aes( x= Year, y = Revenue, fill = Product)+
+  geom_col()+
+labs(x= 'Years', y = 'Sales Revenues',
+       title = 'Smart Products Revenue Breakdown By Product Type and Year',
        subtitle = 'subtitle',
-       fill= 'some title',
+       fill= 'Product Type',
        caption = 'Sales Team')
    
 ```
 ## Actually managed to get the x/y axis resolved
 ##Got titles in and captions.
 
+
+
+```{r}
+ggplot(qb_revenue_breakdown)+
+  aes( x= Year, y = Revenue, fill = Product)+
+  geom_col()
+  
+```
+#Now correct
 
 ```{r}
 qb_revenue_breakdown%>%
