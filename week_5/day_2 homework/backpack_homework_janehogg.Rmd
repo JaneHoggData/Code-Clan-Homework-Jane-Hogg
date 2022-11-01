@@ -25,3 +25,108 @@ view(backpack)
 ##q2Question 2.
 
 ##What is the distribution of backpack weights that students are carrying? Choose an appropriate graph to show the distribution.
+
+#Distribution of information (packweights) but one variable that that is a constant
+##Selected first to provide only one part of the data
+ 
+```{r}
+
+backpack_weight <-backpack%>%
+  select(backpack_weight)
+
+```
+
+```{r}
+```
+
+
+```{r}
+ggplot(backpack_weight)+
+aes((x=outcome))+
+  geom_histogram(binwidth = 30,col = "white" )+
+  labs(x = "Outcome",
+      y= "Count")
+```
+##No idea why this is not working - will return to this one.
+
+```{r}
+¶
+```
+##AAAAAAAAAAH
+
+```{r}
+ggplot(backpack)+
+  aes(
+    x = backpack_weight,
+    y = body_weight
+  ) +
+  geom_point() + 
+  labs(x = "Backpack Weight", y = "Body Weight",
+       title = 'Backpack Weight v Body Weight',
+       subtitle = 'November 2022',
+       caption = 'Child Health Team, Edinburgh')
+
+  
+```
+
+
+##Q 3 Are there differences in backpack weight between sex?
+##
+```{r}
+backpack%>%
+  group_by(backpack_weight, sex)%>%
+  mutate(mean_group_score = mean(backpack_weight))%>%
+  mutate(group = as_factor(group))%>%
+  ggplot()+
+  aes(x= backpack_weight, y = sex)
+```
+
+```{r}
+backpack%>%
+  group_by(backpack_weight, sex)+
+  ggplot()
+  aes(x= backpack_weight, y = sex)
+ggplot()+
+```
+
+
+
+```{r}
+backpack%>%
+  ggplot()+
+  geom_line(aes (x= sex, y=backpack_weight, colour = year)) +
+  labs(x = "Backpack Weight", y = "Sex",
+       title = 'Backpack Weight v Body Weight',
+       subtitle = 'November 2022',
+       caption = 'Child Health Team, Edinburgh')
+```
+##Not the best looking graph but you can see that males backpacks are heavier that the females.
+
+##Q4What is the relationship between body weight and backpack weight?
+##column plot here to show the comparisons
+
+
+```{r}
+backpack%>%
+  ggplot(aes (x = body_weight, y = backpack_weight, colour = sex))+
+  geom_point(aes(colour = sex))+
+  geom_point( aes(shape = status))+
+labs(x = "Body Weight", y = "Backpack Weight",
+       title = 'Backpack Weight v Body Weight',
+       subtitle = 'November 2022',
+       caption = 'Child Health Team, Edinburgh')
+```
+
+##Q5 Is this relationship different between men and women? Choose an appropriate plot and interpret your findings.
+
+##Q6
+##What proportion of students report back pain?
+##  Pie Chart - but too late to continue now.
+
+
+
+
+
+
+
+
