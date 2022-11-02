@@ -69,7 +69,7 @@ ggplot(pets) +
 ```
   
 ```{r}
-sleepy_pets <- ggplot(pets) +
+sleepy_pets <- ggplot(sleep) +
   aes(x = sleep, fill = sex) +
   scale_fill_manual(values=c('#E69F00', '#56B4E9')) +
   geom_histogram(bins = 20, col = "white", show.legend = FALSE) + 

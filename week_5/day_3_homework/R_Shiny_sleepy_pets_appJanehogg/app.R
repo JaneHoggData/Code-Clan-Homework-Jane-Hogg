@@ -23,11 +23,11 @@ sleepy_pets <- sort(unique( pets$sleep))
 ui <- fluidPage(
   titlePanel("Pets and Sleep"),
   theme = bs_theme (bootswatch = "yeti"),
-  tags$i( "italics text can be places here"),
+  tags$i( "No Pets were harmed during this research"),
   tags$br(),
   tags$b( "for the bold text"),
   tags$a("Pets at Home Website", href = "https://www.petsathome.com/" ),
-  tags$h1("This is an enourmous heading"),
+  tags$h1("Who sleeps the most?"),
   sidebarLayout(
     sidebarPanel(
       radioButtons(
@@ -46,11 +46,9 @@ ui <- fluidPage(
     
   ))
   
-
-
 server <- function(input, output) {
   output$sleep_plot <- renderPlot(
-    sleepy_pets <- ggplot(pets) +
+    sleep_plot <- ggplot(pets) +
       aes(x = sleep, fill = sex) +
       scale_fill_manual(values=c('#E69F00', '#56B4E9')) +
       geom_histogram(bins = 20, col = "white", show.legend = FALSE) + 
