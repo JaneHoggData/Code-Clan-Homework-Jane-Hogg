@@ -10,6 +10,7 @@
 
 library(shiny)
 library(tidyverse)
+library(bslib)
 
 olympics <- CodeClanData::olympics_overall_medals
 
@@ -17,6 +18,7 @@ country_choice <- sort(unique( olympics$team))
 
 ui <- fluidPage(
   titlePanel("Olympic Medals"),
+  theme = bs_theme (bootswatch = "yeti"),
   tags$i( "italics text can be places here"),
   tags$br(),
   tags$b( "for the bold text"),
