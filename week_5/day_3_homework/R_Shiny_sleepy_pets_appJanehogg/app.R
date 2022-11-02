@@ -38,7 +38,7 @@ ui <- fluidPage(
       
       selectInput(
         inputId = "sleep",
-        label = "How much?",
+        label = "How much Sleep?",
         choices = sleep)
         
       ),
