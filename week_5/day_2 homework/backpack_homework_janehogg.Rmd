@@ -37,6 +37,7 @@ backpack_weight <-backpack%>%
 ```
 
 ```{r}
+names(backpack)
 ```
 
 
@@ -48,6 +49,17 @@ aes((x=outcome))+
       y= "Count")
 ```
 ##No idea why this is not working - will return to this one.
+##More histograms needed to practice
+##Right answer is below = 
+
+```{r}
+ggplot(backpack) +
+  aes(x = backpack_weight) +
+  geom_histogram(bins = 20, col = "white", fill = "dark green") + 
+  theme_light() + 
+  labs(y = "number of backpacks", x = "weight")
+```
+
 
 ```{r}
 ¶
@@ -80,6 +92,35 @@ backpack%>%
   ggplot()+
   aes(x= backpack_weight, y = sex)
 ```
+```{r}
+ggplot(backpack) +
+  aes(x = backpack_weight, fill = sex) +
+  scale_fill_manual(values=c('#E69F00', '#56B4E9')) +
+  geom_histogram(bins = 20, col = "white", show.legend = FALSE) + 
+  theme_light() + 
+  labs(y = "number of backpacks", x = "weight") + 
+  facet_wrap(~ sex, nrow = 2)
+```
+
+
+```{r}
+
+  ggplot(backpack)+
+aes(x=backpack_weight)+
+  geom_histogram(bins = 14,colour = "white")
+```
+##THis does not include a colour.
+##Bin is how many columns there are in the graph.
+
+
+
+```{r}
+ggplot(backpack) +
+  aes(x = backpack_weight) +
+  geom_histogram(bins = 20, col = "white", fill = "blue4")
+```
+
+
 
 ```{r}
 backpack%>%
@@ -102,6 +143,8 @@ backpack%>%
 ```
 ##Not the best looking graph but you can see that males backpacks are heavier that the females.
 
+
+
 ##Q4What is the relationship between body weight and backpack weight?
 ##column plot here to show the comparisons
 
@@ -121,11 +164,19 @@ labs(x = "Body Weight", y = "Backpack Weight",
 
 ##Q6
 ##What proportion of students report back pain?
+
+
+
+
+
 ##  Pie Chart - but too late to continue now.
 
 
 
 
+```{r}
+colours()
+```
 
 
 
