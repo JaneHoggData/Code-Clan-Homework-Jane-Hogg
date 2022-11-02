@@ -1,0 +1,93 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+install.packages('wesanderson')
+```
+
+```{r}
+devtools::install_github('bbc/bbplot')
+```
+
+```{r}
+library(tidyverse)
+
+
+
+library(readr)
+pets <- read_csv("pets.csv")
+View(pets)
+
+```
+
+```{r}
+pets%>%
+  ggplot(aes(x = age, y = weight, colour = sex))
+  geom_point(aes(colour = sex))+
+  geom_point(aes(shape = name))
+```
+
+```{r}
+ggplot(aes(x = age, y = weight)) +
+  geom_point(aes(colour = sex, shape = animal, size = 4))
+  geom_text(aes(label = name))
+```
+
+```{r}
+pets %>%
+  ggplot(aes(x = age, y = weight)) +
+  geom_point(aes(colour = sex, shape = animal, size = 4))
+geom_text(aes(label = name))
+```
+
+```{r}
+ggplot(pets)+
+  aes(x=sleep)+
+  geom_histogram(bins = 15, col = "cyan", fill = "honeydew4")+
+  theme_light()+
+  labs(y = "Gender", x= "Sleep/hrs" )
+```
+
+```{r}
+ ggplot(pets)+
+  aes(x=sleep)+
+  geom_histogram(bins = 15, col = "cyan", fill = "honeydew4")+
+    labs(y = "Animal", x= "Sleep/hrs" )
+```
+
+  
+```{r}
+ggplot(pets) +
+  aes(x = sleep, fill = sex) +
+  scale_fill_manual(values=c('#E69F00', '#56B4E9')) +
+  geom_histogram(bins = 20, col = "white", show.legend = FALSE) + 
+  theme_light() + 
+  labs(y = "Gender", x = "Sleep/hrs") + 
+  facet_wrap(~ sex, nrow = 2)
+```
+  
+```{r}
+sleepy_pets <- ggplot(pets) +
+  aes(x = sleep, fill = sex) +
+  scale_fill_manual(values=c('#E69F00', '#56B4E9')) +
+  geom_histogram(bins = 20, col = "white", show.legend = FALSE) + 
+  theme_light() + 
+  labs(y = "Gender", x = "Sleep/hrs") + 
+  facet_wrap(~ sex, nrow = 2)
+```
+  
+  
+  
+  
+  
+  
+  
+  
+```{r}
+colours()
+
+```
+  
+  
