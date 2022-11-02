@@ -121,6 +121,13 @@ ggplot(backpack) +
 ```
 
 
+```{r}
+ggplot(backpack) +
+  aes(x = backpack_weight) +
+  geom_histogram(bins = 20, col = "white", fill = "coral1")
+```
+
+
 
 ```{r}
 backpack%>%
@@ -143,6 +150,14 @@ backpack%>%
 ```
 ##Not the best looking graph but you can see that males backpacks are heavier that the females.
 
+```{r}
+ggplot(backpack) + 
+  aes(x = body_weight, y = backpack_weight, color = sex) + 
+  geom_point() + 
+  facet_wrap(~sex) + 
+    scale_color_manual(values=c('#E69F00', '#56B4E9'))+
+    labs(x = "body weight", y = "backpack weight")
+```
 
 
 ##Q4What is the relationship between body weight and backpack weight?
