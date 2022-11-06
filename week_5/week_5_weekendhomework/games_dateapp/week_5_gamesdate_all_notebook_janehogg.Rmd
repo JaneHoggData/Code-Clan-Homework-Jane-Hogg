@@ -10,7 +10,15 @@ install.packages('wesanderson')
 
 ```
 ```{r}
+```
+
+
+```{r}
 library(tidyverse)
+```
+
+
+```{r}
 ```
 ```{r}
 devtools::install_github('bbc/bbplot')
@@ -22,7 +30,7 @@ library(CodeClanData)
 library(dplyr)
 library(janitor)
 library(devtools)
-devtools::install_github('cttobin/ggthemr')
+
 ```
 
 ```{r}
@@ -97,8 +105,8 @@ labs(x= 'Year of Release', y = 'Sales',
 
 
 ```{r}
-ggplot(game_sales) +
-  geom_bar(aes(x = genre, fill = year_of_release), stat = "count")+
+ ggplot(game_sales)+
+  geom_bar(aes(x = genre, fill = year_of_release), stat = "count")
   
 
 ```
@@ -115,11 +123,11 @@ ggplot(game_sales) +
 
 ```{r}
 ggplot(game_sales) +
+  theme_classic()+
   geom_bar(aes(x = genre, fill = year_of_release)) +
-  scale_fill_manual (values = c ("grey40", "maroon"),
-                     guide = "none")+
+  
   labs(x = "Genre",
-    y = "Number Released",
+    y = "Year of Release",
     title = "Preferred Genre by Year of Release",
     subtitle = "Games Genre ",
     fill = "Year of Release")+
@@ -135,12 +143,29 @@ ggplot(game_sales) +
     
 
 ```{r}
-ggplot(game_sales)
-  geom_bar(aes(x = year_of_release, fill = sales))
+
+```
+
+```{r}
+ggplot(game_sales) +
+  theme_classic()+
+  geom_bar(aes(x = publisher, fill = developer)) +
+  labs(x = "Publisher",
+    y = "No. Games",
+    title = "Publisher and Developer Profile",
+    subtitle = "Games Genre ",
+    fill = "Top Developer")+
+coord_flip()
 ```
 
 
 
+
+#building the app and what to focus on.
+
+##What insights to highlight - what is most popular genre?
+##What should the users actionable insights be - what type of genre will generate the most revenue.?
+##Which developer to select based on sales success.?
 
 
 
