@@ -1,0 +1,106 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+install.packages('wesanderson')
+
+
+```
+```{r}
+library(tidyverse)
+```
+```{r}
+devtools::install_github('bbc/bbplot')
+```
+```{r}
+
+library(ggplot2)
+library(CodeClanData)
+library(dplyr)
+library(janitor)
+```
+
+```{r}
+CodeClanData::game_sales
+```
+
+```{r}
+view(game_sales)
+```
+
+
+```{r}
+ggplot(game_sales)+
+  aes(
+    x = critic_score,
+    y = user_score
+  ) +
+  geom_point() + 
+  labs(x = "Critics Score", y = "Gamer Score",
+       title = 'Critics Score v Gamer Score',
+       subtitle = 'November 2022',
+       caption = 'Game Sales Team, Edinburgh')
+```
+
+```{r}
+
+  
+
+```
+
+```{r}
+ggplot(game_sales) +
+  aes(x = critic_score) +
+  geom_histogram(bins = 80, col = "white", fill = "dark blue") + 
+  theme_light() + 
+  labs(y = "Sales", x = "Critic Score")
+```
+
+#Higher the critic score the higher th volume of sales
+
+```{r}
+ggplot(game_sales)+
+  geom_line(aes(x=year_of_release, y = sales, colour = genre))
+
+```
+
+#looks a bit crowded
+#Need to add some titles
+
+```{r}
+
+ggplot(game_sales)+
+  geom_line(aes(x=year_of_release, y = sales, colour = genre))+
+labs(x= 'Year of Release', y = 'Sales',
+       title = 'Year of Release and Games Genre',
+       subtitle = 'Twenty Years of Gaming',
+       fill= 'some title',
+       caption = 'Games Sales Team, Edinburgh, November 2022')
+```
+
+
+
+
+
+
+       
+    
+
+```{r}
+ggplot(game_sales)
+  geom_bar(aes(x = year_of_release, fill = sales))
+```
+
+Geoms: Lines!
+Aesthetics: x = year, y = intake, colour = food type
+
+
+
+
+
+
+
+
