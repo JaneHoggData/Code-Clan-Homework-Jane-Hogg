@@ -21,6 +21,8 @@ library(ggplot2)
 library(CodeClanData)
 library(dplyr)
 library(janitor)
+library(devtools)
+devtools::install_github('cttobin/ggthemr')
 ```
 
 ```{r}
@@ -44,9 +46,21 @@ ggplot(game_sales)+
        subtitle = 'November 2022',
        caption = 'Game Sales Team, Edinburgh')
 ```
+##Bit dull. Revise the colour section on the notes and enhance this
+
 
 ```{r}
-
+ggplot(game_sales)+
+  aes(
+    x = critic_score,
+    y = user_score
+  ) +
+  geom_point() + 
+  scale_color_gradient( low = "steel blue", high = "dark blue")+
+  labs(x = "Critics Score", y = "Gamer Score",
+       title = 'Critics Score v Gamer Score',
+       subtitle = 'November 2022',
+       caption = 'Game Sales Team, Edinburgh')
   
 
 ```
@@ -82,11 +96,42 @@ labs(x= 'Year of Release', y = 'Sales',
 ```
 
 
+```{r}
+ggplot(game_sales) +
+  geom_bar(aes(x = genre, fill = year_of_release), stat = "count")+
+  
+
+```
+
+```{r}
+ggplot(game_sales) +
+  geom_bar(aes(x = genre, fill = year_of_release)) +
+  labs(x = "Genre",
+    y = "Number Released",
+    title = "Preferred Genre by Year of Release",
+    subtitle = "Games Genre ",
+    fill = "Year of Release")
+```
+
+```{r}
+ggplot(game_sales) +
+  geom_bar(aes(x = genre, fill = year_of_release)) +
+  scale_fill_manual (values = c ("grey40", "maroon"),
+                     guide = "none")+
+  labs(x = "Genre",
+    y = "Number Released",
+    title = "Preferred Genre by Year of Release",
+    subtitle = "Games Genre ",
+    fill = "Year of Release")+
+  coord_flip()
+
+
+```
+
+##Looks a lot better but wanted to highlight the sport/action with colour.
 
 
 
-
-       
     
 
 ```{r}
@@ -94,8 +139,7 @@ ggplot(game_sales)
   geom_bar(aes(x = year_of_release, fill = sales))
 ```
 
-Geoms: Lines!
-Aesthetics: x = year, y = intake, colour = food type
+
 
 
 
