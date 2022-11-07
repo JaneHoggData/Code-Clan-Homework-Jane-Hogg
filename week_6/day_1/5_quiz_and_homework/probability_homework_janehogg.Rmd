@@ -1,0 +1,53 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+library(gtools)
+library(tidyverse)
+
+
+library(readr)
+titanic <- read_csv("data/titanic.csv")
+View(titanic)
+```
+```{r}
+view(titanic)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Questions - practise the functions learnt during the class
+Q1 If I roll a six-sided dice once, what is the probability of getting a number less than 5?
+
+```{r}
+source("prob.R")
+
+s_one_dice <-rolldie(1)
+
+s_sum_less_than_5 <- s_one_dice %>%
+  filter(total < 5)
+
+s_sum_less_than_5
+```
+
+
+
+
+
+
