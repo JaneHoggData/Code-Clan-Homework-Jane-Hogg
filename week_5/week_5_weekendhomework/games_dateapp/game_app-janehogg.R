@@ -4,6 +4,7 @@
 #
 
 library(shiny)
+library(ggplot2)
 library(tidyverse)
 library(bslib)
 
@@ -21,9 +22,9 @@ ui <- fluidPage(
     tags$i( "Everyone is a Winner !!"),
     tags$br(),
     tags$b( "for the bold text"),
-    tags$a("ParaOlympic Website",
+    tags$a("Economist Website",
            href = "https://www.economist.com/culture/2022/05/10/video-game-writing-is-improving-by-leaps-and-bounds" ),
-    tags$h1("Five Country Medal Comparisons"),
+    tags$h1(" xxx"),
     sidebarLayout(
       sidebarPanel(
         radioButtons(
