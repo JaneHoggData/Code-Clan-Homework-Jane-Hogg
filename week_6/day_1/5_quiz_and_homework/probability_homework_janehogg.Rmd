@@ -16,6 +16,43 @@ view(titanic)
 
 ```
 ```{r}
+
+```
+
+```{r}
+titanic %>%
+  count(class)
+```
+
+##should have done full count of class.
+
+```{r}
+titanic <- titanic %>%
+  mutate(crew = class %in% c("engineering crew", "victualling crew", "restaurant staff", "deck crew"))
+```
+
+```{r}
+titanic %>%
+  count(crew)
+```
+
+```{r}
+titanic_probs <- titanic %>%
+  group_by(crew) %>%
+  summarise(prob = sum(survived == "yes") / n()) 
+
+titanic_probs
+```
+#
+
+```{r}
+titanic_probs %>%
+  filter(crew == TRUE)
+```
+
+
+
+```{r}
 titanic_crew <-titanic%>%
   filter(fare == 0)
 ```
@@ -103,9 +140,18 @@ s_one_dice <-rolldie(1)
 
 
 ```{r}
-dice_less_than_five <-s_one_dice %>%
-  filter(total<5)
+roll_less_than_5 <-s_one_dice %>%
+  roll_less_than_5 <- s_one_dice%>%
+  filter(X1 <5)
+
+prob <- nrow(roll_less_5) / nrow(s_one_dice)
+prob
 ```
+
+
+
+
+
 
 ##Q2How many outcomes are there in the sample space of an experiment in which we toss three dice?
 
