@@ -15,15 +15,74 @@ View(titanic)
 view(titanic)
 
 ```
+```{r}
+titanic_crew <-titanic%>%
+  filter(fare == 0)
+```
+###890 crew members - filtered the variable regarding fare.  All who had free passage.
+```{r}
+crew_survuved <-titanic_crew%>%
+  filter(survived == "no")
+  
+```
+
+##Total of 2207 people on the Titanic
+#Total of 890 crew and 1317 passengers
+#From the 890 crew 679 did not survive
+#From the 890 crew 211 did survive
+##Just realised there are some NA in the data set !!
+
+
+```{r}
+crew_survived <-titanic_crew%>%
+  filter(survived == "no")%>%
+summarise(probabi = n() / nrow(survived))
+```
+
+##Not sure why this is not working.
+
+
+```{r}
+view(titanic)
+
+```
+```{r}
+firstclass <-titanic_passengers <-titanic%>%
+  filter(class == ("1st"))
+```
+```{r}
+firstclass%>%
+  filter(survived == "no")
+```
+
+```{r}
+first_not_survived <-firstclass%>%
+  filter(survived == "no")%>%
+  summarise(prob = sum(firstclass) == "no") / n())
+```
+
+###
+
+##324 1st class passengers
+##123 did not survive
+
+```{r}
+secondclass <-titanic_passengers <-titanic%>%
+  filter(class == ("2nd"))
+```
+##284 2nd class passengers
+
+```{r}
+thirdclass <-titanic_passengers <-titanic%>%
+  filter(class == ("3rd"))
+```
+##709 third class passengers.
 
 
 
-
-
-
-
-
-
+```{r}
+firstclass
+```
 
 
 
@@ -40,14 +99,47 @@ source("prob.R")
 
 s_one_dice <-rolldie(1)
 
-s_sum_less_than_5 <- s_one_dice %>%
-  filter(total < 5)
-
-s_sum_less_than_5
 ```
 
 
+```{r}
+dice_less_than_five <-s_one_dice %>%
+  filter(total<5)
+```
 
+##Q2How many outcomes are there in the sample space of an experiment in which we toss three dice?
 
+```{r}
+source("prob.R")
+
+s_three_dice <-rolldie(3)
+```
+##216 obs with 3 variables = 216x3 =648 possible outcomes
+
+##Q3In an experiment where we roll four dice:
+##how many outcomes are in the event where the total of the four dice equals 5, 6 or 7)? combination question where the order of the numbers does not matter.
+##what is the probability of this event?
+##what assumptions do we apply in answering part ii?
+
+```{r}
+source("prob.R")
+
+s_four_dice <-rolldie(4)
+```
+
+```{r}
+number_draws <- s_four_dice%>%
+  number_draws <-combinations(5,6,7,1:6)
+          
+
+```
+
+```{r}
+s_four_dice
+```
+
+```{r}
+s_four_dice <combinations(5,7,6,6)
+```
 
 
