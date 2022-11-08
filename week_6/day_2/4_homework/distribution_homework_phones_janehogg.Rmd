@@ -88,12 +88,66 @@ review_frequency%>%
   
 ```
 
+#distribution shape might look better - as this looks wild.
+
+```{r}
+review_frequency %>%
+  ggplot(aes(x=totalReviews))+
+  geom_histogram(col = "red")
+  
+```
+
+#bimodal distribution as a bit of a peak again at 500 reviews
+
+#Range Refresh
+```{r}
+range_reviews <-review_frequency %>%
+  summarise(range_reviews = range(totalReviews))
+```
+1 - 980
+#outliers - ???
+
+#Quartile and interquartile
+
+```{r}
+review_frequency%>%
+  group_by(totalReviews)
+ 
+```
+
+
+#Fitting a normal distribution
+management_sal_stats <- management %>% 
+  summarise(
+    mean = mean(salary),
+    sd = sd(salary)
+  )
+
+
+
+```{r}
+review_frequency %>%
+  summarise(
+    num = n(),
+    mean = mean(totalReviews),
+    sd = sd(totalReviews)
+  )
+  
+```
 
 
 
 
 
-air_con_sales %>%
-  summarise(mean_daily_sales = mean(units_sold), 
-            median_daily_sales = median(units_sold),
-            mode_daily_sales = get_mode(units_sold))
+
+
+
+
+
+
+
+
+
+
+
+
