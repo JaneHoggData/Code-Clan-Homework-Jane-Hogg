@@ -1,0 +1,99 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+#Q1 Load the data.
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(gtools)
+
+```
+
+```{r}
+library(readr)
+X20190928_items <- read_csv("data/20190928-items.csv")
+View(X20190928_items)
+```
+```{r}
+phone_data <-(X20190928_items)
+```
+
+```{r}
+phone_data %>%
+  select(brand)
+ 
+```
+
+```{r}
+phone_data%>%
+  count(brand)
+ 
+```
+#count and then need this is desc order.
+```{r}
+phone_data%>%
+  count(brand)%>%
+  arrange(desc(n))
+```
+
+#Q2The brand with the highest numbers of phones in the dataset is samsung with 397 phones.
+
+
+```{r}
+samsung_data <- phone_data%>%
+  filter(brand == "Samsung")
+```
+
+Q3For your top brand, plot the distribution of phone ratings as a probability density, overlaying a fitted normal distribution. Do you think the normal distribution provides a good model of these ratings?
+
+
+
+```{r}
+review_frequency <-samsung_data %>%
+  tabyl(totalReviews)
+
+```
+
+#total time that the data occurs for the review of the phone.
+#Now plotting the probability distribution
+
+```{r}
+review_frequency %>%
+  ggplot(aes(x=totalReviews, y=percent))+
+  geom_col()+
+  theme_linedraw()
+```
+#Need to look at summarise of the distribution as this is not that great a graph.
+#need the mean/median/mode
+
+```{r}
+get_mode <- function(data){
+
+  tabled_data <- table(data)
+  table_names <- names(tabled_data)
+  
+  return( table_names[tabled_data == max(tabled_data)] )
+  
+}
+```
+
+```{r}
+review_frequency%>%
+  summarise(mean_daily_reviews = mean(totalReviews), 
+            median_daily_reviews = median(totalReviews),
+            mode_daily_reviews = get_mode(totalReviews))
+  
+```
+
+
+
+
+
+
+air_con_sales %>%
+  summarise(mean_daily_sales = mean(units_sold), 
+            median_daily_sales = median(units_sold),
+            mode_daily_sales = get_mode(units_sold))
