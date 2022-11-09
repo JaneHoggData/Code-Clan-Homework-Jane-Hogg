@@ -1,0 +1,29 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(janitor)
+```
+
+
+
+```{r}
+library(readr)
+ames <- read_csv("7_homework/data/ames.csv")
+View(ames)
+```
+
+
+
+```{r}
+skimr::skim(ames)
+```
+
+```{r}
+clean_names(ames)
+```
+
