@@ -149,6 +149,7 @@ samsung_stats
 
 ```
 # From 397 ratings there is on average a review of 3.5733 and deviation of 0.68 deviation from the average.
+#Filter for a number of ratings 
 
 ```{r}
 samsung_data %>%
@@ -165,6 +166,21 @@ samsung_data %>%
 ```
 
 
+```{r}
+samsung_data %>%
+  filter(rating  > 10) % %
+  ggplot(aes(x = rating)) +
+  geom_histogram(aes(y = ..density..), col = "white") +
+  stat_function(
+    fun = dnorm, 
+    args = list(
+      mean = samsung_stats$mean,
+      sd = samsung_stats$sd
+    ),
+    col = "red"
+  )
+```
+```
 
 
 
