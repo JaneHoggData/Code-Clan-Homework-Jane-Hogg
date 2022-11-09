@@ -48,7 +48,7 @@ samsung_data <- phone_data%>%
 ```
 
 Q3For your top brand, plot the distribution of phone ratings as a probability density, overlaying a fitted normal distribution. Do you think the normal distribution provides a good model of these ratings?
-
+#Probability density was the action
 
 
 ```{r}
@@ -59,6 +59,7 @@ review_frequency <-samsung_data %>%
 
 #total time that the data occurs for the review of the phone.
 #Now plotting the probability distribution
+#There isn't a percent column in the table. Error at this point on the y axis.
 
 ```{r}
 review_frequency %>%
@@ -116,12 +117,7 @@ review_frequency%>%
 ```
 
 
-#Fitting a normal distribution
-management_sal_stats <- management %>% 
-  summarise(
-    mean = mean(salary),
-    sd = sd(salary)
-  )
+
 
 
 
@@ -135,9 +131,38 @@ review_frequency %>%
   
 ```
 
+#code provides the mean and the sd = standard normal that can then be plotted.
 
+```{r}
+samsung_data <- phone_data %>%
+  filter(brand == "Samsung") %>%
+  select(rating)
 
+samsung_stats <- phone_data %>%
+  filter(brand == "Samsung") %>%
+  summarise(
+    count = n(),
+    mean = mean(rating),
+    sd = sd(rating)
+  )
+samsung_stats
 
+```
+# From 397 ratings there is on average a review of 3.5733 and deviation of 0.68 deviation from the average.
+
+```{r}
+samsung_data %>%
+  ggplot(aes(x = rating)) +
+  geom_histogram(aes(y = ..density..), col = "white") +
+  stat_function(
+    fun = dnorm, 
+    args = list(
+      mean = samsung_stats$mean,
+      sd = samsung_stats$sd
+    ),
+    col = "red"
+  )
+```
 
 
 
