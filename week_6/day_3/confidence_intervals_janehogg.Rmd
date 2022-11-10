@@ -27,3 +27,85 @@ skimr::skim(ames)
 clean_names(ames)
 ```
 
+```{r}
+view(ames)
+```
+
+##Q1 Load data and become familiar with it.
+
+##Q2Investigate the distribution of lot_area. Is the distribution roughly normal? If not, what problems do you find?
+
+
+```{r}
+summary_Lot.Area <- ames%>%
+  summarise(
+    mean_Lot.Area = mean(Lot.Area)
+  )
+
+summary_Lot.Area
+```
+
+```{r}
+ames%>%
+ggplot (aes(x = Lot.Area))+
+  geom_histogram(bins = 150, col = "white", fill = "steelblue")
+  
+```
+##Graph looks a bit odd - tried changing the bins - but looks ok (ish)
+
+
+#Q3Compute and visualise a bootstrap sampling distribution for the mean(lot_area) of the sold houses.
+
+
+
+
+
+
+
+```{r}
+infer_sample <- ames %>%
+  specify(response = Lot.Area)%>%
+  generate(reps = 5000, type = "bootstrap")%>%
+  calculate(stat = "mean")
+```
+```{r}
+ames%>%
+  count(Lot.Area)
+```
+
+```{r}
+mean_lot_area <-ames%>%
+  select(Lot.Area)%>%
+  summarise(
+    count = n(),
+    mean = mean(Lot.Area),
+    sd = sd(Lot.Area)
+  )
+
+mean_lot_area
+```
+
+
+
+```{r}
+mean_lot_area %>%
+ggplot(aes(x= Lot.Area))+
+  geom_histogram(aes(y = ..density..), col= "white")+
+  stat_function(
+    fun = dnorm,
+    args = list(
+      mean = lot_Area$mean,
+      sd = lot_area$sd
+    ),
+    col = "red"
+  )
+
+```
+
+
+
+
+
+
+
+
