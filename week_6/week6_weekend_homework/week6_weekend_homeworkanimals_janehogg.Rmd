@@ -26,11 +26,57 @@ mean_sleep <- msleep%>%
 ```
 ##mean 10.4 and the standard deviation 4.4.
 ##mean for all animals is 10.4 v jabberwocky at 7hours.
-##Sample does differ - visualalise
+##Sample does differ - visualalise now
+
+
+```{r}
+mean_sleep <- msleep%>%
+  select(sleep_total)%>%
+   summarise(
+    mean = mean(sleep_total))
+
+```
+
+```{r}
+msleep %>%
+  ggplot(aes(x = sleep_total))+
+  theme_classic()+
+  geom_histogram( Col = "red")
+
+```
+```{r}
+observed_stat_mean_avg_sleep <- msleep%>%
+  select(sleep_total)%>%
+   summarise(
+    mean = mean(sleep_total))
+```
+
+```{r}
+sleep_null_distribution <- msleep %>%
+  specify(response = sleep_total)%>%
+  hypothesise(null = "point", mu = 10.4)%>%
+  generate(reps = 2000, type = "bootstrap")%>%
+  calculate(stat = "mean")
+```
+
+```{r}
+sleep_null_distribution %>%
+  visualise(bins = 30)
+```
+
+```{r}
+sleep_null_distribution %>%
+  visualise(bins = 30)
+shade_p_value(obs_stat = observed_stat$mean_avg_sleep,
+                direction = "both") 
+```
+
+### Not sure why this is not working???
 
 
 
-##Perform an appropriate statistical test to determine whether omnivores sleep for significantly longer than herbivores, on average.
+
+## Q2 Perform an appropriate statistical test to determine whether omnivores sleep for significantly longer than herbivores, on average.
 
 ```{r}
 msleep%>%
@@ -89,10 +135,6 @@ ggplot(msleep) +
 ```
 
 
-```{r}
-
-```
-
 
 
 ```{r}
@@ -149,7 +191,7 @@ msleep%>%
 
 ```
 
-##10 domesticated and 83 not domesticated - domesticatd animals orms 12% of the total population.
+##10 domesticated and 83 not domesticated - domesticatd animals are 12% of the total population and so greater than 5%
 Now need to try and do that in code.
 
 
@@ -162,12 +204,33 @@ Hypothesis Test
 Estimated that 40% of the 30,000 population aware of the coffee shop (12,000 people)
 
 Sample of 200
-HO - 
+HO - 0.40
+Ha = -0.40
 
-xxxxx
+##Q2.2
+You selected five days at random last month and then randomly selected 200 of each sampled day’s users into group A and another 200 of that day’s users into group B. Group A continued to be shown the banner at the right hand side of the webpage (its usual position) while group B was shown the banner at the top of the page. You monitored each sampled user’s interactions with the website, in particular the ‘click through rate’ (CTR) on the banner, i.e. what proportion of sampled users clicked on the banner. You want to use the sampled data to test the hypothesis that website users overall are more likely to click on the banner if positioned at the top of the page
 
-```{r}
 
-                )
+Hypotehsis testing
+
+Coffee shop problem. Significance level: 0.05, calculated p-value: 0.07
+
+
+
+Question 2.
+
+Website company problem. Significance level: 0.01, p-value: 0.006
+
+
+
+Question 3.
+
+##Manufacturing company problem. Significance level: 0.05, p-value: 0.55
+##The specification of the part stipulates a width of 145mm, and the manufacturing process is said to have ‘drifted’ if the mean width of parts differs significantly from 145mm. You want to use the sampled measurements to test whether the process overall has drifted.
+Yes the sample measurement has drifted on average(mean) 0.05 - but not sure how to explain the p (probability) 50/50 chance - so half the parts are ok/not ok.
+
+
+
+
 
 

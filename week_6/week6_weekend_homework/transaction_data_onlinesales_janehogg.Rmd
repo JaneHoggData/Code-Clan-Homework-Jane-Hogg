@@ -1,0 +1,82 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(infer)
+library(ggplot2)
+```
+
+```{r}
+library(readr)
+transactions <- read_csv("1_weekend_homework/data/online_retail_subset.csv")
+View(online_retail_subset)
+```
+
+```{r}
+head(transactions, 20)
+```
+
+Q1 Item A - ‘HEART OF WICKER SMALL’ (StockCode 22469)
+
+
+```{r}
+total_transaction <- transactions%>%
+  count()
+```
+
+
+```{r}
+transactions%>%
+  count(StockCode)%>%
+  
+
+  
+```
+
+```{r}
+ false_white <-transactions%>%
+  mutate(StockCode = StockCode %in% c("22469"))
+
+```
+
+```{r}
+heart_of_wicker <-transactions%>%
+  filter(StockCode ==22469)
+  
+  
+```
+
+```{r}
+heart_of_wicker%>%
+  count()
+```
+```{r}
+heart_of_wicker%>%
+  count(UnitPrice)
+```
+
+
+##Support for Product A = From a total of 30,000 transactions Item 22469 constitutes (110 transaction) 0.3% of the total transactions.
+But this is not units or revenue (see above)
+
+
+##Calculate the support and confidence for rule (A→B).
+
+
+item A - ‘HEART OF WICKER SMALL’ (StockCode 22469)
+item B - ‘LARGE CAKE TOWEL PINK SPOTS’ (StockCode 21110)
+
+
+```{r}
+large_cake <-transactions%>%
+  filter(StockCode ==21110)
+```
+##Support for Product A 22469 (110)  and B 21110 (14) a total of 124 transactions from 30,000 is 1.2% of total transactions - but this does not include number of units or the revenue from the transactions. 
+
+
+
+
