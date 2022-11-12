@@ -159,7 +159,7 @@ ggplot(omni_sleep) +
 ```
 ##
 
-##Now create the mean
+##Now create the mean..
 
 ```{r}
 omni_sleep%>%
