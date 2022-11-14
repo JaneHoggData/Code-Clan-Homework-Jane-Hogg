@@ -65,6 +65,26 @@ sleep_null_distribution %>%
 ```
 
 ```{r}
+sleep_null_distribution <- msleep %>%
+  specify(response = sleep_total) %>%
+  hypothesize(null = "point", mu = 7) %>%
+  generate(reps = 10000, type = "bootstrap") %>%
+  calculate(stat = "mean")
+
+obs_stat <- msleep %>%
+  specify(response = sleep_total) %>%
+  calculate(stat = "mean")
+
+sleep_null_distribution %>%
+  visualise() +
+  shade_p_value(direction = "both", obs_stat = obs_stat)
+```
+
+
+
+
+
+```{r}
 sleep_null_distribution %>%
   visualise(bins = 30)
 shade_p_value(obs_stat = observed_stat$mean_avg_sleep,
@@ -76,7 +96,7 @@ shade_p_value(obs_stat = observed_stat$mean_avg_sleep,
 
 
 
-## Q2 Perform an appropriate statistical test to determine whether omnivores sleep for significantly longer than herbivores, on average.
+## Q3 Perform an appropriate statistical test to determine whether omnivores sleep for significantly longer than herbivores, on average.
 
 ```{r}
 msleep%>%
@@ -95,9 +115,50 @@ msleep%>%
 ```
 
 ```{r}
+msleep %>%
+  distinct(vore)
+```
+
+##Shoud have used the distinct function here.
+
+
+H0: μsleep_total(omni)−μsleep_total(herbi)=0
+Ha: μsleep_total(omni)−μsleep_total(herbi)>0
+α=0.05
+
+
+```{r}
+null_distribution <- msleep %>%
+  filter(vore %in% c("omni", "herbi")) %>%
+  specify(sleep_total ~ vore) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 10000, type = "permute") %>%
+  calculate(stat = "diff in means", order = c("omni", "herbi"))
+
 
 ```
 
+
+```{r}
+null_distribution <- msleep %>%
+  filter(vore %in% c("omni", "herbi")) %>%
+  specify(sleep_total ~ vore) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 10000, type = "permute") %>%
+  calculate(stat = "diff in means", order = c("omni", "herbi"))
+
+obs_stat <- msleep %>%
+  filter(vore %in% c("omni", "herbi")) %>%
+  specify(sleep_total ~ vore) %>%
+  calculate(stat = "diff in means", order = c("omni", "herbi"))
+
+null_distribution %>%
+  visualise() +
+  shade_p_value(direction = "right", obs_stat = obs_stat)
+ 
+
+
+```
 
 
 
@@ -193,6 +254,31 @@ msleep%>%
 
 ##10 domesticated and 83 not domesticated - domesticatd animals are 12% of the total population and so greater than 5%
 Now need to try and do that in code.
+
+```{r}
+msleep %>%
+  distinct(conservation)
+```
+
+```{r}
+msleep_domesticated <- msleep %>%
+  mutate(is_domesticated = conservation == "domesticated") %>%
+  filter(!is.na(is_domesticated))
+```
+
+```{r}
+null_distribution <- msleep_domesticated %>%
+  specify(response = is_domesticated, success = "TRUE") %>%
+  hypothesize(null = "point", p = 0.05) %>%
+  generate(reps = 10000, type = "draw") %>%
+  calculate(stat = "prop")
+
+```
+
+
+
+
+
 
 
 

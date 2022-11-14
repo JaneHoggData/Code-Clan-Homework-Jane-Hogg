@@ -13,7 +13,7 @@ library(ggplot2)
 ```{r}
 library(readr)
 transactions <- read_csv("1_weekend_homework/data/online_retail_subset.csv")
-View(online_retail_subset)
+View(transactions)
 ```
 
 ```{r}
@@ -27,6 +27,21 @@ Q1 Item A - ‘HEART OF WICKER SMALL’ (StockCode 22469)
 total_transaction <- transactions%>%
   count()
 ```
+
+```{r}
+total_transactions <- transactions %>%
+  summarise(n = n_distinct(InvoiceNo)) %>%
+  flatten_dbl()
+
+support_a <- transactions %>%
+  filter(StockCode == 22469) %>%
+  summarise(prop_invoices_with_item = n_distinct(InvoiceNo) / total_transactions)
+
+support_a
+```
+
+
+
 
 
 ```{r}
