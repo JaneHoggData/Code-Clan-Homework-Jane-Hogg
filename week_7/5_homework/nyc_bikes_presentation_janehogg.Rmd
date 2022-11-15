@@ -1,15 +1,17 @@
 ---
 title: "nyc_bikes_presentation"
 author: "jane_hogg"
-date: '2022-11-14'
-output: html_document
+date: "2022-11-14"
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+
 
 
 
@@ -22,48 +24,53 @@ library(lubridate)
 library(tsibbledata)
 library(dplyr)
 ```
-##Contents
+###Contents
 
 Introduction
 Purpose of the Report
-summary of Findings and Recommendations
+summary of Findings - Top Take Aways
 Deep Dive - 
   Our Customers
   Trips
+Recommendations
 
 
 
+###Introduction
 
-##Introduction
+The data used is from Citi Bikes based in New York, New York.  It is a sample of 10 bikes useage in 2018.  The start and stop time of use, start geo-location, membership type,  age and gender of the user is included in the sample.
 
-The data used is from Citi Bikes based in New York, New York.  It is a sample of 10 bikes useage during 2018.  The start and stop time of use, start geo-location, membership type age and gender of the user is included in the sample.
+Citi Bikes was founded in May 2013 and is a bike sharing scheme,  Bikes are available 24/7 7 days a week all year round.  There are well over 12,000+ bikes available across Manhattan, Brooklyn, Queens and Jersey City and there was a total of 746 active bike locations by the end of December 2018.
 
-Citi Bikes was founded in May 2013 and is a bike sharing scheme,  Bikes are availabel 24/7 7 days a week all year round.  There are well over 12,000+ bikes available across Manhattan, Brooklyn, Queens and Jersey City and there was a total of 746 active bike locations by the end of Decembmer 2018.
-
-There are a range of price points to access the scheme including annual subscriptions.  At the end of December 2018 there were 3,653 annual members and 33,965 casual members signed up or renewed. Total
-annual membership stood at 147,090 including memberships purchased with Jersey City billing zip codes.
+There are now a range of price points to access the scheme including annual subscriptions, pay as you go and concessions.  At the end of December 2018 there were 3,653 annual members and 33,965 casual users signed up or renewed. Total annual membership stood at 147,090 including memberships purchased with Jersey City billing zip codes.
 
 The data has been processed to remove trips that are taken by staff as they service and inspect the system, trips that are taken to/from any “test” and any trips that were below 60 seconds in length (potentially false starts or users trying to re-dock a bike to ensure it's secure).  There is no personal data included in the sample other than age/gender. 
 
-There are three points to note from the dataset that may lead us to consider if the data is fully representative of the populations as a whole. First the sample is predominately male - 72% of the sample and as a consequence the results may overly represent the use by men.  Secondly the samepl is predominately  members and this data does not include any discounted, single-day pass or single ride users.  
+There are three points to note from the dataset that may lead us to consider if the data is fully representative of the populations as a whole. Firstly the sample is predominately male (72% of the sample) and as a consequence the results may be overly representative of them.  Secondly the sample is predominately monthly subscription members (xx of the sample) and this data does not include any discounted, single-day pass or single ride users.  
 
-All bikes for rental are only suitable for full-able boded individuals.  There are no accessibility bikes or trikes and as a consequence anyone with a disability or limited mobility would not have been included in the data set.
+Finally the bikes for rental are only suitable for fully-able bodied individuals.  There are no accessibility bikes or trikes and as a consequence anyone with a disability or limited mobility would not have been included in the data set as they could not access the bikes.
 
 
 
-##Purpose of the Report
+###Purpose of the Report
 
-What is the pattern of bike hires over time (e.g. within a year, month, week, or day)?
+There are two key questions below, but overall the aim of the work is to provide insights and actions that could increase bike hire and revenues. 
 
 Do bike hire patterns differ between bike rider demographics? (e.g. gender, type of trip, age)
 
-Any other insights?
-
-## Summary of Findings
+What is the pattern of bike hires over time (e.g. within a year, month, week, or day)?
 
 
 
+### Summary of Findings
 
+Female users constitute only 21% of the data set and there may be an opportunity to attract more women to the service - Recommendation - further research to consider if there are particular barriers to women using the service or why we not attracting female users.  Secondary data is available to consider what theses barriers might be e.g confidence to cycle, safety or a better understanding of women travel habits is needed.  In addition a change in the gender selections would be advisable in the future to fully reflect options.
+
+The age profile of the sample is predominately in the XX age bracket and although the average age of a New Yorker is 37 there are still over 1.2m people in New York over 65 - Recommendation - consider what the barriers are to older people using the service; are the bikes suitable for older people or people with additional needs? 
+
+Subscribers make up significant percentage of the sample - 92%.  Does this pricing structure inhibit the more casual user taking more trips?  - Recommendation - undertake further research on the pricing strategy with casual users or test alternative pricing strategies as part of promotional work with target segments that are unlikely to undermine the subscriber base e.g day/overnight visitors
+
+July and August are the peak months for use - unsurprising considering the weather and holiday season. But there is scope for growth in the shoulder months  Recommendation - there is an opportunity to grow the autumn and spring months(when there is better weather) and increase uptake of the service as the weather improves.  The Christmas period, lower uptake, but there still could be an opportunity to grow uptake if the target is leisure.sightseeing users. e.g Elf/Santa Hunt !!
 
 
 ##Our Customers - 
@@ -115,7 +122,7 @@ ggplot(sale_type)+
     subtitle = "2018 Data (Sample 4268)",)
 ```
 
-##The majority of users were subscribers - 92% of the sample with the remaining 8% being pay as you go users.  There are financial advantages of securing a monthly payment over pay as you go fees, however this could be a market were there are opportunities for growth, in particular for the tourist market.
+##The majority of users were subscribers - 92% of the sample with the remaining 8% being pay as you go.  There are financial advantages of securing a monthly payment over pay as you go fees, however this could be limiting access to some segments of the market and there coud be opportunities for growth, in particular for the tourist market or those segments that are price sensitive.
 
 
 ##Age profile of users
@@ -124,11 +131,7 @@ ggplot(sale_type)+
  age <- nyc_bikes%>%
   mutate(age = 2018 - birth_year)
 
-
-
 ```
-
-
 
 
 
@@ -157,7 +160,7 @@ ggplot(age)+
 ```
 
 ## The age profile of our users is interesting with the majority being under 55.  
-##According to 2019 US population estimates 15.4% of the total population in New York are 65 years and over.  There are currently 8.3million people in New York and this constitutes a potential market size of 1,250,522.  Not everyone in this age profile will be willing/capable to cycle but targetting just 1% of this market could bring 12,505 new users. Recommend further research with the 55+ market to consider demand and user needs.
+##According to 2019 US population estimates 15.4% of the total population in New York are 65 years and over.  There are currently 8.3million people in New York and this constitutes a potential market size of 1,250,522.  Not everyone in this age profile will be willing/capable of cycle but targetting just 1% of this market could bring 12,505 new users. Recommend further research with the 55+ market to consider demand and user needs.
 
 
 ###Our Trips - Monthly Useage
@@ -181,8 +184,6 @@ nyc_bikes_df %>%
   summarise(n) 
 ```
 
-
-
 ```{r}
 
 nyc_bikes_df %>%
@@ -201,9 +202,34 @@ ggplot(aes(x= month, y = n))+
 
 ```
 
-##July and August are the most popular months corresponding to both the driest months.  The lowest useage is in the winter months were cyling requires extra clothin, care and also there is more likely to be poor weather conditions e.g snow.  
+##July and August are the most popular months corresponding to both the driest months and the warmest.  The lowest useage is in the spring and the winter months were cyling requires extra clothing, care and also there is more likely to be poor weather conditions e.g snow.
+
 ##However there may still be opportunities to grow the useage during periods where there are opportunities for tourists to enjoy Christmas/New Year lights displays in the city.
 
+
+```{r}
+nyc_bikes_df %>%
+  group_by(month, gender) %>%
+  count() %>%
+  summarise(n) %>%
+ggplot(aes(x= month, y = n, group = gender))+
+  geom_point()+
+  theme_bw()+
+  scale_x_continuous(breaks = 1:12)+
+  facet_wrap(~gender)+
+  labs(
+    x = " Months ",
+    y = "Number of Users",
+    title = "Variation in Use v Gender",
+    subtitle = "2018 Data (Sample 4268)",)
+```
+
+##Data set is heavily skewed to male respondents the data does not show any significant difference, other than for males use in the 1-3 months - this may be due the fact that men are more willing to cycle in wintet weather, but this is very much anecdoatal and would need to be explored as part of the recomendation above.
+
+
+
+
+
 ```{r}
 nyc_bikes_df %>%
   group_by(day) %>%
@@ -211,25 +237,63 @@ nyc_bikes_df %>%
   summarise(n) %>%
   ggplot(aes(x= day, y = n))+
   geom_point()+
-  theme_bw()
+  theme_bw()+
+  labs(
+    x = " Day of the Month ",
+    y = "Number of Users",
+    title = "Citibike Users each Day",
+    subtitle = "2018 Data (Sample 4268)",)
+
 ```
+overall there is limited evidence of any trends in this data.
+
 
 
 ```{r}
 nyc_bikes_df %>%
-  group_by(day) %>%
+  group_by(day, gender) %>%
   count() %>%
   summarise(n) %>%
-  ggplot(aes(x= day, y = n))+
-  geom_point()+
-  theme_bw()
+  ggplot(aes(x= day, y = n, group = gender))+
+  geom_line()+
+  theme_bw()+
+facet_wrap(~gender)+
+  labs(
+    x = " Day of the Month ",
+    y = "Number of Users",
+    title = "Variation in Use v Gender",
+    subtitle = "2018 Data (Sample 4268)",)
+  
 ```
 
 
 
+```{r}
+nyc_bikes_df %>%
+  group_by(day, gender, age) %>%
+  count() %>%
+  summarise(n) %>%
+  ggplot(aes(x= day, y = n, group = gender))+
+  geom_histogram()+
+  theme_bw()+
+facet_grid(~gender, )+
+  labs(
+    x = " Day of the Month ",
+    y = "Number of Users",
+    title = "Variation in Use v Gender",
+    subtitle = "2018 Data (Sample 4268)",)
+```
+
+
+xxxxxxx
 
 
 
+
+
+ggplot(benefits) + 
+  geom_histogram(aes(x = age, fill = sex), col = "white") + 
+  facet_grid(married ~ sex)
 
 Index from the Bikes data
 
