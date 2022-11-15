@@ -20,6 +20,7 @@ library(janitor)
 library(ggplot2)
 library(lubridate)
 library(tsibbledata)
+library(dplyr)
 ```
 ##Contents
 
@@ -65,7 +66,7 @@ Any other insights?
 
 
 
-###Patterns of Bike hires - weekly, monthly and yearly
+##Our Customers - 
 
 ```{r}
 tsibbledata::nyc_bikes
@@ -82,64 +83,147 @@ gender
 
 ```
 ```{r}
-nyc_bikes %>% 
-  select(gender)%>%
-  geom_bar(aes(x = gender, y = count()))+
-  title = "Gender of People Hiring"
-  subtitle = "Data from students around the world\n"
-    fill = "Gender"
+ggplot(gender)+
+  geom_bar(aes(x = gender, y = n), stat = 'identity', fill = "lightblue")+
+ labs(
+    x = "Gender",
+    y = "Number",
+    title = "Gender of Citibike Users",
+    subtitle = "2018 Data (Sample 4268)",)
+    
 ```
 
-```{r}
-
-nyc_bikes %>% 
-  group_by(gender, type) %>% 
-  summarise(counts = n())
-```
-```{r}
-nyc_bikes %>% 
-  group_by(type) %>% 
-count(type)
-  
-```
-
-```{r}
-count_gender <-nyc_bikes %>% 
-  group_by(gender, type) %>% 
-  summarise(counts = n())
+##From the data we can see that there is a significantly higher number of men in the survey results  - 71% of the sample with only 21% female.  It should also be noted that 6% of the sample did not respond to the question.
 
 
-```
-```{r}
-ggplot(count_gender)+
-  geom_bar(aes(x=gender, y = counts)) Stat = "identity"
-```
-
-ggplot(count_data) +
-  geom_bar(aes(x = superpower, y = counts, fill = school_year), stat = "identity")
 
 
 ```{r}
-nyc_bikes %>% 
-  mutate(
-    day = day(start_time),
-    month = month(start_time)
-  )
+sale_type <-nyc_bikes %>% 
+  select(type)%>%
+ count(type)
+
+```
+
+```{r}
+ggplot(sale_type)+
+  geom_bar(aes(x = type, y = n), stat = 'identity', fill = "lightblue")+
+ labs(
+    x = "Payment Method",
+    y = "Number",
+    title = "Payment Method of Citibike Users",
+    subtitle = "2018 Data (Sample 4268)",)
+```
+
+##The majority of users were subscribers - 92% of the sample with the remaining 8% being pay as you go users.  There are financial advantages of securing a monthly payment over pay as you go fees, however this could be a market were there are opportunities for growth, in particular for the tourist market.
+
+
+##Age profile of users
+
+```{r}
+ age <- nyc_bikes%>%
+  mutate(age = 2018 - birth_year)
+
+
+
 ```
 
 
-netflix <- netflix %>%
-  mutate(
-    day = day(date_added),
-    month = month(date_added, label = TRUE, abbr = FALSE),
-    year = year(date_added)
 
 
 
+```{r}
+ggplot(age)+
+  aes(x = age) +
+  geom_histogram(bins =20, colour = "lightblue")+
+  labs(
+    x = " Age ",
+    y = "Number of Users",
+    title = "Age Profiles of Citibike Users",
+    subtitle = "2018 Data (Sample 4268)",)
+
+
+```
+
+```{r}
+ggplot(age)+
+  aes(x = age) +
+  geom_histogram(bins =10, colour = "lightblue")+
+  labs(
+    x = " Age ",
+    y = "Number of Users",
+    title = "Age Profiles of Citibike Users - Drill down",
+    subtitle = "2018 Data (Sample 4268)",)
+```
+
+## The age profile of our users is interesting with the majority being under 55.  
+##According to 2019 US population estimates 15.4% of the total population in New York are 65 years and over.  There are currently 8.3million people in New York and this constitutes a potential market size of 1,250,522.  Not everyone in this age profile will be willing/capable to cycle but targetting just 1% of this market could bring 12,505 new users. Recommend further research with the 55+ market to consider demand and user needs.
+
+
+###Our Trips - Monthly Useage
+
+
+```{r}
+nyc_bikes_df <- nyc_bikes %>%
+  mutate(day = day(start_time),
+         month = month(start_time),label = TRUE, abbr = FALSE,
+          year = year(start_time))
+nyc_bikes_df <- nyc_bikes_df %>%
+  mutate(age = (year - birth_year))
+```
 
 
 
+```{r}
+nyc_bikes_df %>%
+  group_by(month) %>%
+  count() %>%
+  summarise(n) 
+```
 
+
+
+```{r}
+
+nyc_bikes_df %>%
+  group_by(month) %>%
+  count() %>%
+  summarise(n) %>%
+ggplot(aes(x= month, y = n))+
+  geom_point()+
+  theme_bw()+
+  scale_x_continuous(breaks = 1:12)+
+  labs(
+    x = " Months ",
+    y = "Number of Users",
+    title = "Citibike Users each Month",
+    subtitle = "2018 Data (Sample 4268)",)
+
+```
+
+##July and August are the most popular months corresponding to both the driest months.  The lowest useage is in the winter months were cyling requires extra clothin, care and also there is more likely to be poor weather conditions e.g snow.  
+##However there may still be opportunities to grow the useage during periods where there are opportunities for tourists to enjoy Christmas/New Year lights displays in the city.
+
+```{r}
+nyc_bikes_df %>%
+  group_by(day) %>%
+  count() %>%
+  summarise(n) %>%
+  ggplot(aes(x= day, y = n))+
+  geom_point()+
+  theme_bw()
+```
+
+
+```{r}
+nyc_bikes_df %>%
+  group_by(day) %>%
+  count() %>%
+  summarise(n) %>%
+  ggplot(aes(x= day, y = n))+
+  geom_point()+
+  theme_bw()
+```
 
 
 

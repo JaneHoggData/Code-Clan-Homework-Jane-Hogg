@@ -3,4 +3,48 @@ title: "R Notebook"
 output: html_notebook
 ---
 
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(janitor)
+library(ggplot2)
+library(lubridate)
+library(tsibbledata)
+library(dplyr)
+```
+```{r}
+tsibbledata::nyc_bikes
+```
+
+```{r}
+ggplot(nyc_bikes)+
+  aes(x = gender, y = type)+
+  geom_line()
+```
+
+According to 2019 US population estimates, population of New York City is 8,336,817, out of these 3,979,090 are male, 4,357,727 are female, The sex ratio of New York City is 91. The median age of the New York City population is 37.2, New York City population by age are, under 18 years is 1,715,077, 16 years and over is 6,803,099, 18 years and over is 6,621,740, 21 years and over is 6,347,299, 65 years and over is 1,566,835. 47.7% are male, 52.3% are female, 20.6% are under 18 years old, 81.6% are 16 years and over, 79.4% are 18 years and over, 76.1% are 21 years and over, 15.4% are 65 years and over. There are total 3,546,601 housing units, The voting population of New York City are 5,457,412, out of these 2,532,843 are male voters, 2,924,569 are female voters, 46.4% are male,53.6% are female.
+
+
+```{r}
+ggplot(nyc_bikes)+
+  aes(x= type, y = gender)+
+  geom_col()
+```
+
+
+
+ggplot(qb_revenue_breakdown) +
+  aes(x = Year, y = Revenue, fill = Product) +
+  geom_col() 
+
+hick_weight <- clean_names(ChickWeight)
+
+ggplot(chick_weight) + 
+  aes(x = time, y = weight, group = chick, colour = diet) +
+  geom_line()
+
+
+
+
+
 
