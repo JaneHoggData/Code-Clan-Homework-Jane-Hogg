@@ -21,6 +21,17 @@ library(ggplot2)
 library(lubridate)
 library(tsibbledata)
 ```
+##Contents
+
+Introduction
+Purpose of the Report
+summary of Findings and Recommendations
+Deep Dive - 
+  Our Customers
+  Trips
+
+
+
 
 ##Introduction
 
@@ -84,6 +95,12 @@ nyc_bikes %>%
 nyc_bikes %>% 
   group_by(gender, type) %>% 
   summarise(counts = n())
+```
+```{r}
+nyc_bikes %>% 
+  group_by(type) %>% 
+count(type)
+  
 ```
 
 ```{r}
