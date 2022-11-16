@@ -3,8 +3,8 @@ title: "nyc_bikes_presentation"
 author: "jane_hogg"
 date: "2022-11-14"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -24,7 +24,7 @@ library(lubridate)
 library(tsibbledata)
 library(dplyr)
 ```
-###Contents
+### Contents
 
 Introduction
 Purpose of the Report
@@ -36,7 +36,7 @@ Recommendations
 
 
 
-###Introduction
+### Introduction
 
 The data used is from Citi Bikes based in New York, New York.  It is a sample of 10 bikes useage in 2018.  The start and stop time of use, start geo-location, membership type,  age and gender of the user is included in the sample.
 
@@ -52,7 +52,7 @@ Finally the bikes for rental are only suitable for fully-able bodied individuals
 
 
 
-###Purpose of the Report
+### Purpose of the Report
 
 There are two key questions below, but overall the aim of the work is to provide insights and actions that could increase bike hire and revenues. 
 
@@ -191,7 +191,7 @@ nyc_bikes_df %>%
   count() %>%
   summarise(n) %>%
 ggplot(aes(x= month, y = n))+
-  geom_point()+
+  geom_point(colour = "blue")+
   theme_bw()+
   scale_x_continuous(breaks = 1:12)+
   labs(
@@ -213,7 +213,7 @@ nyc_bikes_df %>%
   count() %>%
   summarise(n) %>%
 ggplot(aes(x= month, y = n, group = gender))+
-  geom_point()+
+  geom_point(colour = "blue")+
   theme_bw()+
   scale_x_continuous(breaks = 1:12)+
   facet_wrap(~gender)+
@@ -224,7 +224,7 @@ ggplot(aes(x= month, y = n, group = gender))+
     subtitle = "2018 Data (Sample 4268)",)
 ```
 
-##Data set is heavily skewed to male respondents the data does not show any significant difference, other than for males use in the 1-3 months - this may be due the fact that men are more willing to cycle in wintet weather, but this is very much anecdoatal and would need to be explored as part of the recomendation above.
+##Data set is heavily skewed to male respondents the data does not show any significant difference, other than for males use in the 1-3 months - this may be due the fact that men are more willing to cycle in winter weather, but this is very much anecdoatal and would need to be explored as part of the recomendation above.
 
 
 
@@ -236,7 +236,7 @@ nyc_bikes_df %>%
   count() %>%
   summarise(n) %>%
   ggplot(aes(x= day, y = n))+
-  geom_point()+
+  geom_point(colour = "purple")+
   theme_bw()+
   labs(
     x = " Day of the Month ",
@@ -255,7 +255,7 @@ nyc_bikes_df %>%
   count() %>%
   summarise(n) %>%
   ggplot(aes(x= day, y = n, group = gender))+
-  geom_line()+
+  geom_line(colour = "purple")+
   theme_bw()+
 facet_wrap(~gender)+
   labs(
@@ -268,43 +268,8 @@ facet_wrap(~gender)+
 
 
 
-```{r}
-nyc_bikes_df %>%
-  group_by(day, gender, age) %>%
-  count() %>%
-  summarise(n) %>%
-  ggplot(aes(x= day, y = n, group = gender))+
-  geom_histogram()+
-  theme_bw()+
-facet_grid(~gender, )+
-  labs(
-    x = " Day of the Month ",
-    y = "Number of Users",
-    title = "Variation in Use v Gender",
-    subtitle = "2018 Data (Sample 4268)",)
-```
-
-
-xxxxxxx
 
 
 
 
 
-ggplot(benefits) + 
-  geom_histogram(aes(x = age, fill = sex), col = "white") + 
-  facet_grid(married ~ sex)
-
-Index from the Bikes data
-
-start_time:	The time and date when the trip was started.
-stop_time:	The time and date when the trip was ended.
-start_station:	A unique identifier for the starting bike station.
-start_lat:	The latitude of the starting bike station.
-start_long:	The longitude of the starting bike station.
-end_station:	A unique identifier for the destination bike station.
-end_lat:	The latitutde of the destination bike station.
-end_long:	The longitude of the destination bike station.
-type:	The type of trip. A "Customer" has purchased either a 24-hour or 3-day pass, and a "Subscriber" has purchased an annual subscription.
-birth_year	The bike rider's year of birth.
-gender:	The gender of the bike rider.

@@ -1,6 +1,8 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output:
+  pdf_document: default
+  html_notebook: default
 ---
 
 ```{r}
@@ -11,8 +13,17 @@ library(ggplot2)
 library(lubridate)
 library(tsibbledata)
 library(dplyr)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(jsonlite)
+library(rgeos)
+library(sf)
+library(leaflet)
 ```
+
+
 ```{r}
+
 tsibbledata::nyc_bikes
 ```
 
@@ -28,20 +39,103 @@ According to 2019 US population estimates, population of New York City is 8,336,
 ```{r}
 ggplot(nyc_bikes)+
   aes(x= type, y = gender)+
-  geom_col()
+    geom_col(colour = "lightblue")
 ```
 
 
 
-ggplot(qb_revenue_breakdown) +
-  aes(x = Year, y = Revenue, fill = Product) +
-  geom_col() 
+```{r}
+nyc_bikes_df
+```
 
-hick_weight <- clean_names(ChickWeight)
 
-ggplot(chick_weight) + 
-  aes(x = time, y = weight, group = chick, colour = diet) +
-  geom_line()
+
+```{r}
+nyc_geo <- nyc_bikes_df %>% 
+  dplyr::select(bike_id,start_long, start_lat)
+```
+
+```{r}
+attr(nyc_geo, "dim")
+```
+
+```{r}
+plot(nyc_geo[1])
+```
+
+
+
+```{r}
+ggplot(data = nyc_geo, aes(fill = bike_id))+
+  geom_sf()+
+  theme_bw()
+```
+
+
+
+
+
+```{r}
+nyc_geo2 <- leaflet() %>% 
+  addTiles() %>% 
+  addMarkers(lng = -74.04312, lat = 40.719,
+             popup = "The First citibike Hire")
+
+nyc_geo2
+```
+
+##TEst to see if it works
+
+```{r}
+nyc_geo_starts <-leaflet(nyc_geo) %>%
+  addTiles() %>%
+  addCircleMarkers(lng = ~start_long,
+                   lat = ~start_lat)
+nyc_geo_starts
+```
+
+
+```{r}
+nyc_geo_end <-nyc_bikes_df %>% 
+  dplyr::select(bike_id,end_long, end_lat)
+```
+
+
+
+```{r}
+nyc_geo_end <-leaflet(geo_end) %>%
+  addTiles() %>%
+  addCircleMarkers(lng = ~end_long,
+                   lat = ~end_lat, color = "coral")
+nyc_geo_end
+```
+
+
+
+
+
+
+
+
+
+Extra stuff not needed
+ggplot(benefits) + 
+  geom_histogram(aes(x = age, fill = sex), col = "white") + 
+  facet_grid(married ~ sex)
+
+Index from the Bikes data
+
+start_time:	The time and date when the trip was started.
+stop_time:	The time and date when the trip was ended.
+start_station:	A unique identifier for the starting bike station.
+start_lat:	The latitude of the starting bike station.
+start_long:	The longitude of the starting bike station.
+end_station:	A unique identifier for the destination bike station.
+end_lat:	The latitutde of the destination bike station.
+end_long:	The longitude of the destination bike station.
+type:	The type of trip. A "Customer" has purchased either a 24-hour or 3-day pass, and a "Subscriber" has purchased an annual subscription.
+birth_year	The bike rider's year of birth.
+gender:	The gender of the bike rider.
 
 
 
