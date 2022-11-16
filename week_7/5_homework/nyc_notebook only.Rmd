@@ -51,7 +51,7 @@ nyc_bikes_df
 
 
 ```{r}
-nyc_geo <- nyc_bikes_df %>% 
+nyc_geo <- nyc_bikes%>% 
   dplyr::select(bike_id,start_long, start_lat)
 ```
 
