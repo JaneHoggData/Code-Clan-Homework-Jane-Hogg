@@ -47,23 +47,23 @@ library(leaflet)
 
 ### Introduction
 
-- The data used is from Citi Bikes based in New York, New York.  It is a sample of 10 bikes useage in 2018.  The start and stop time of use, start geo-location, membership type,  age and gender of the user.
+- The data used is from Citi Bikes based in New York, New York.  It is a sample of 10 bikes usage in 2018.  The start and stop time of use, start geo-location, membership type,  age and gender of the user.
 
 - Citi Bikes was founded in May 2013 and is a bike sharing scheme,  bikes are available 24/7 7 days a week all year round.  There are well over 12,000+ bikes available across Manhattan, Brooklyn, Queens and Jersey City and there was a total of 746 active bike locations by the end of December 2018.
 
-- Now there are a range of price points to access the scheme including annual subscriptions, pay as you go and concessions.  For this report i have based my work around the 2018 pricing.  At the end of December 2018 there were 3,653 annual members and 33,965 casual users signed up or renewed. Total annual membership stood at 147,090 including memberships purchased with Jersey City billing zip codes.
+- Now there are a range of price points to access the scheme including annual subscriptions, pay as you go and concessions.  For this report i have based my work around the 2018 pricing.  At the end of December 2018 there were 3,653 annual members and 33,965 casual users signed up or renewed. 
 
 - The data has been processed to remove trips that are taken by staff as they service and inspect the system, trips that are taken to/from any “test” and any trips that were below 60 seconds in length (potentially false starts or users trying to re-dock a bike to ensure it's secure).  There is no personal data included in the sample other than age/gender. 
 
-- However there are four points to note from the data that may lead you to consider if the data is fully representative of the populations as a whole and use.
+- However there are four points to note from the data that may lead you to consider if the data is  fully representative of the populations and all potential users.
 
-1. Firstly the sample is predominately male (72% of the sample) and as a consequence the results may be overly representative of them. 
+1. Firstly the sample is predominately male (72% of the sample) and as a consequence the results may be overly representative of their needs. 
 
-2. Secondly the sample is predominately monthly subscription members (xx of the sample) and this data does not include any discounted, single-day pass or single ride users.
+2. Secondly the sample is predominately monthly subscription members (92% of the sample) and this data does not include any discounted, single-day pass or single ride users. Pay as you go existing or new users do not make up a significant part of the sample and as a consequence their habits may not be represented. 
 
 3. This is a sample of 10 bikes over a 12 month period.  If there was the option to review the movement of more bikes then this could be beneficial.
 
-4. Finally the bikes for rental are only suitable for fully-able bodied individuals.  There are no accessibility bikes or trikes and as a consequence anyone with a disability or limited mobility would not have been included in the data set as they could not use a bike they could not ride.
+4. Finally the bikes for rental are only suitable for fully-able bodied individuals.  There are no accessibility bikes or trikes and as a consequence anyone with a disability or limited mobility would not have been included in the data set as they could not access the service.
 
 
 
@@ -79,15 +79,19 @@ What is the pattern of bike hires over time (e.g. within a year, month, week, or
 
 ### Summary of Findings - Top Take-Aways
 
-# Female users constitute only 21% of the data set and there may be an opportunity to attract more women to the service 
-
-# The age profile of the sample is predominately in the younger age brackets and although the average age of a New Yorker is 37 there are still over 1.2m people in New York over 65
-
-# Subscribers make up significant percentage of the sample - 92%.  Does this pricing structure inhibit the more casual user taking more trips?
-
-# Trips are short and predominately clustered around transport hubs - but there may be other factors impacting on this that would need further research.
+# Trips are short and predominately clustered around transport hubs - but there may be other factors impacting on this that would need further research.  There is limited variation in respect of trips in relations to age/gender
 
 # July and August are the peak months for use - unsurprising considering the weather and holiday season. But there could be scope for growth in the shoulder months?   
+
+# Female users constitute only 21% of the data set and there may be an opportunity to attract more women to the service.
+
+# The age profile of the sample is predominately in the younger age brackets and although the average age of a New Yorker is 37 there are still over 1.2m people in New York over 65.  This could be a new market.
+
+# Subscribers make up significant percentage of the sample - 92%.  Does your current pricing structure inhibit the more casual user taking more trips or you attacting more pay as you go users?
+
+
+
+
 
 
 ##  Our Customers  
@@ -140,7 +144,7 @@ ggplot(sale_type)+
 ```
 
 
-The majority of users were subscribers - 92% of the sample with the remaining 8% being pay as you go.  There are clearly financial advantages of securing a monthly payment over pay as you go fees, however this could be limiting access to some segments of the market and there coud be opportunities for growth, in particular for the tourist market or those segments that are price sensitive.
+The majority of users were subscribers - 92% of the sample with the remaining 8% being pay as you go.  There are clearly financial advantages of securing a monthly payment over pay as you go fees, however this could be limiting access to some segments of the market and there could be opportunities for growth, in particular for the tourist market or those segments that are price sensitive.
 
 
 ##Age profile of users
@@ -219,7 +223,7 @@ ggplot(aes(x= month, y = n))+
 
 ```
 
-July and August are the most popular months corresponding to both the driest months and the warmest.  The lowest useage is in the spring and the winter months were cyling requires extra clothing, care and also there is more likely to be poor weather conditions e.g snow.
+July and August are the most popular months corresponding to both the driest months and the warmest.  The lowest use is in the spring and the winter months were cyling requires extra clothing, care and also there is more likely to be poor weather conditions e.g snow.
 
 
 ```{r}
@@ -239,7 +243,7 @@ ggplot(aes(x= month, y = n, group = gender))+
     subtitle = "2018 Data (Sample 4268)",)
 ```
 
-Data set is heavily skewed to male respondents the data does not show any significant difference, other than for males use in the 1-3 months - this may be due the fact that men are more willing to cycle in winter weather, but this is very much anecdoatal and would need to be explored as part of our recommedations.
+Data set is heavily skewed to male respondents the data does not show any significant difference, other than for males use in the 1-3 months - this may be due the fact that men are more willing to cycle in winter weather, but this is very much anecdotal and would need to be explored as part of our recommendations.
 
 
 ```{r}
@@ -257,7 +261,7 @@ nyc_bikes_df %>%
     subtitle = "2018 Data (Sample 4268)",)
 
 ```
-# overall there is limited evidence of any significant peaks/troughs in the use during a month.
+overall there is limited evidence of any significant peaks/troughs in the use during a month.
 
 
 
@@ -278,7 +282,7 @@ facet_wrap(~gender)+
   
 ```
 
-# overall there is limited evidence of any significant difference in use by gender and as noted in the introduction the data is heavily skewed to males.
+overall there is limited evidence of any significant difference in use by gender and as noted in the introduction the data is heavily skewed to males.
 
 
 ```{r}
@@ -306,21 +310,28 @@ nyc_geo_end <-leaflet(nyc_geo_end) %>%
                    lat = ~end_lat, color = "coral")
 nyc_geo_end
 ```
-# Trips are short and clustered around transport hubs - but pricing and time limits may be driving this as opposed to customer needs.
+Trips are short and clustered around transport hubs - but pricing and time limits may be driving this as opposed to customer needs.
+
 
 ##  Conclusions and Recommendations
+ 
    
+# The shoulder months could offer an opportunity for growth - Recommendation -is there an opportunity to grow the autumn and spring months(when there is better weather) and increase uptake of the service as the weather improves.  The Christmas period, lower uptake, but there still could be an opportunity to grow uptake if the target is leisure.sightseeing users. 
+
+# Are we using price effectively - Recommendation - undertake further research on the pricing strategy with casual users or test alternative pricing strategies as part of promotional work with target segments that won't undermine the subscriber base e.g day/overnight visitors
    
 # Attract more women to the scheme- Recommendation - further research to consider if there are particular barriers to women using the service or why we aren't attracting female users.  Secondary data is available to consider what theses barriers might be e.g confidence to cycle, safety or a better understanding of women travel habits is needed.  
    
 # In addition a change in the gender selection options would be advisable in the future to fully reflect a broader definition of gender.
    
    
-# Attract older people to join the scheme  Recommendation - consider what the barriers are to older people using the service; are the bikes suitable for older people or people with additional needs?
+# Attract older people to join the scheme  Recommendation - consider what the barriers are to older people using the service; are the bikes suitable for older people or all people with additional needs regardless of age or gender?
+
+# Forcasting - bigger and more representative sample required for this to be helpful.
    
    
-# Are we using price effectively - Recommendation - undertake further research on the pricing strategy with casual users or test alternative pricing strategies as part of promotional work with target segments that won't undermine the subscriber base e.g day/overnight visitors
+# Thanks - any questions
   
-# The shoulder months could offer an opportunity for growth - Recommendation -is there an opportunity to grow the autumn and spring months(when there is better weather) and increase uptake of the service as the weather improves.  The Christmas period, lower uptake, but there still could be an opportunity to grow uptake if the target is leisure.sightseeing users. 
+
 
    
