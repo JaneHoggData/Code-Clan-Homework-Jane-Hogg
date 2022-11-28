@@ -1,0 +1,75 @@
+---
+title: "nhs_cancer"
+author: "jane_hogg"
+date: "2022-11-28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(ggplot2)
+library(ggpubr)
+```
+
+```{r}
+library(readr)
+cancer_all <- read_csv("data/opendata_inc1620comb_hb (1).csv")
+```
+
+```{r}
+theme_mhairi <-
+  theme_minimal(base_size = 8) +
+  theme(
+    plot.title = element_text(size = 8),
+    plot.subtitle = element_text(size = 8),
+    complete = TRUE,
+    legend.position = "bottom")
+```
+
+```{r}
+cancer_all <- clean_names(cancer_all)
+```
+
+```{r}
+cancer_allBorders <-cancer_all %>%
+  filter(hb == "S08000016")
+```
+
+```{r,fig.height=2}
+plot_left <- 
+cancer_allBorders %>%
+  filter(cancer_site == "All cancer types") %>%
+  filter(sex != "All") %>%
+ ggplot +
+  aes(x = year, y = incidences_all_ages, colour = sex) +
+  geom_line() +
+  labs(
+    x = "Year",
+    title = "All cancer cases in Borders",
+    subtitle =  "2016 to 2022",
+    y = ""
+  ) +
+  theme_mhairi
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
