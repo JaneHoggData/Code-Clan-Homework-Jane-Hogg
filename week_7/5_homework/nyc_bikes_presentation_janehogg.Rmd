@@ -3,12 +3,13 @@ title: "nyc_bikes_presentation"
 author: "jane_hogg"
 date: "2022-11-14"
 output:
-  html_document: default
+  html_document:
+    code_folding: hide
   pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
@@ -71,30 +72,30 @@ library(leaflet)
 
 There are two key questions below, but overall the aim of the work is to provide insights and actions that can increase bike hire and revenues. 
 
-Do bike hire patterns differ between bike rider demographics? (e.g. gender, type of trip, age)
+ Do bike hire patterns differ between bike rider demographics? (e.g. gender, type of trip, age)
 
-What is the pattern of bike hires over time (e.g. within a year, month, week, or day)?
+ What is the pattern of bike hires over time (e.g. within a year, month, week, or day)?
 
 
 
 ### Summary of Findings - Top Take-Aways
 
-# Trips are short and predominately clustered around transport hubs - but there may be other factors impacting on this that would need further research.  There is limited variation in respect of trips in relations to age/gender
+Trips are short and predominately clustered around transport hubs - but there may be other factors impacting on this that would need further research.  There is limited variation in respect of trips in relations to age/gender
 
-# July and August are the peak months for use - unsurprising considering the weather and holiday season. But there could be scope for growth in the shoulder months?   
+July and August are the peak months for use - unsurprising considering the weather and holiday season. But there could be scope for growth in the shoulder months?   
 
-# Female users constitute only 21% of the data set and there may be an opportunity to attract more women to the service.
+Female users constitute only 21% of the data set and there may be an opportunity to attract more women to the service.
 
-# The age profile of the sample is predominately in the younger age brackets and although the average age of a New Yorker is 37 there are still over 1.2m people in New York over 65.  This could be a new market.
+The age profile of the sample is predominately in the younger age brackets and although the average age of a New Yorker is 37 there are still over 1.2m people in New York over 65.  This could be a new market.
 
-# Subscribers make up significant percentage of the sample - 92%.  Does your current pricing structure inhibit the more casual user taking more trips or you attacting more pay as you go users?
-
-
+Subscribers make up significant percentage of the sample - 92%.  Does your current pricing structure inhibit the more casual user taking more trips or you attacting more pay as you go users?
 
 
 
 
-##  Our Customers  
+
+
+##Our Customers  
 
 ```{r}
 tsibbledata::nyc_bikes
@@ -102,7 +103,7 @@ tsibbledata::nyc_bikes
 
 
 
-```{r}
+```{r,echo=FALSE,warning=FALSE,error=FALSE}
 gender <- nyc_bikes %>% 
   select(gender)%>%
  count(gender)
@@ -184,7 +185,7 @@ The age profile of our users is interesting with the majority being under 55.
 According to 2019 US population estimates 15.4% of the total population in New York are 65 years and over.  There are currently 8.3million people in New York and this constitutes a potential market size of 1,250,522.  Not everyone in this age profile will be willing/capable of cycle but targetting just 1% of this market could bring 12,505 new users. 
 
 
-##  Our Trips - Monthly Useage
+##Our Trips - Monthly Useage
 
 
 ```{r}
@@ -313,24 +314,24 @@ nyc_geo_end
 Trips are short and clustered around transport hubs - but pricing and time limits may be driving this as opposed to customer needs.
 
 
-##  Conclusions and Recommendations
+##Conclusions and Recommendations
  
    
-# The shoulder months could offer an opportunity for growth - Recommendation -is there an opportunity to grow the autumn and spring months(when there is better weather) and increase uptake of the service as the weather improves.  The Christmas period, lower uptake, but there still could be an opportunity to grow uptake if the target is leisure.sightseeing users. 
+#The shoulder months could offer an opportunity for growth - Recommendation -is there an opportunity to grow the autumn and spring months(when there is better weather) and increase uptake of the service as the weather improves.  The Christmas period, lower uptake, but there still could be an opportunity to grow uptake if the target is leisure.sightseeing users. 
 
-# Are we using price effectively - Recommendation - undertake further research on the pricing strategy with casual users or test alternative pricing strategies as part of promotional work with target segments that won't undermine the subscriber base e.g day/overnight visitors
+#Are we using price effectively - Recommendation - undertake further research on the pricing strategy with casual users or test alternative pricing strategies as part of promotional work with target segments that won't undermine the subscriber base e.g day/overnight visitors
    
-# Attract more women to the scheme- Recommendation - further research to consider if there are particular barriers to women using the service or why we aren't attracting female users.  Secondary data is available to consider what theses barriers might be e.g confidence to cycle, safety or a better understanding of women travel habits is needed.  
+#Attract more women to the scheme- Recommendation - further research to consider if there are particular barriers to women using the service or why we aren't attracting female users.  Secondary data is available to consider what theses barriers might be e.g confidence to cycle, safety or a better understanding of women travel habits is needed.  
    
-# In addition a change in the gender selection options would be advisable in the future to fully reflect a broader definition of gender.
+#In addition a change in the gender selection options would be advisable in the future to fully reflect a broader definition of gender.
    
    
-# Attract older people to join the scheme  Recommendation - consider what the barriers are to older people using the service; are the bikes suitable for older people or all people with additional needs regardless of age or gender?
+#Attract older people to join the scheme  Recommendation - consider what the barriers are to older people using the service; are the bikes suitable for older people or all people with additional needs regardless of age or gender?
 
-# Forcasting - bigger and more representative sample required for this to be helpful.
+#Forcasting - bigger and more representative sample required for this to be helpful.
    
    
-# Thanks - any questions
+#Thanks - any questions
   
 
 
