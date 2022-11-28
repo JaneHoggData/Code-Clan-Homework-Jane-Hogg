@@ -148,7 +148,7 @@ ggplot(sale_type)+
 The majority of users were subscribers - 92% of the sample with the remaining 8% being pay as you go.  There are clearly financial advantages of securing a monthly payment over pay as you go fees, however this could be limiting access to some segments of the market and there could be opportunities for growth, in particular for the tourist market or those segments that are price sensitive.
 
 
-##Age profile of users
+## Age profile of users
 
 ```{r}
  age <- nyc_bikes%>%
@@ -223,6 +223,7 @@ ggplot(aes(x= month, y = n))+
     subtitle = "2018 Data (Sample 4268)",)
 
 ```
+
 
 July and August are the most popular months corresponding to both the driest months and the warmest.  The lowest use is in the spring and the winter months were cyling requires extra clothing, care and also there is more likely to be poor weather conditions e.g snow.
 
