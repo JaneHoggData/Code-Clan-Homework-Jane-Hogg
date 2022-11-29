@@ -41,11 +41,51 @@ theme_mhairi <-
 ```{r}
 cancer_all <- clean_names(cancer_all)
 ```
+```{r}
+cancer_all(head(view al))
+```
 
+
+
+### Introduction
+
+- The data used is from PHS (Public Health Scotland) and in order to provide an over view of the data I have used the following data set:
+2016 - 2021 - Five Year Incidence of Cancer by Health Board
+
+
+### Purpose of the Data Review
+
+In order to inform current and future planning for provision of cancer treatment services in NHS Borders, you would like to gain a better understanding of the incidence of cancer in NHS Borders.
+
+
+###Overview of Trends in Cancer in NHS Borders
 ```{r}
 cancer_allBorders <-cancer_all %>%
   filter(hb == "S08000016")
 ```
+```{r}
+gender_count <-cancer_allBorders%>% 
+  select(sex)%>%
+  count(sex)
+```
+
+
+```{r}
+cancer_allBorders %>%
+  filter(cancer_site == "All cancer types") %>%
+  filter(sex != "All") %>%
+ ggplot +
+  aes(x = year, y = incidences_all_ages, colour = sex) +
+  geom_line() +
+  labs(
+    x = "Year",
+    title = "All cancer cases in Borders",
+    subtitle =  "2016 to 2022",
+    y = "incidence")
+```
+
+
+
 
 ```{r,fig.height=2}
 plot_left <- 
