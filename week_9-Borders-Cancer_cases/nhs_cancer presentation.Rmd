@@ -29,21 +29,10 @@ cancer_all <- read_csv("data/opendata_inc1620comb_hb (1).csv")
 ```
 
 ```{r}
-theme_mhairi <-
-  theme_minimal(base_size = 8) +
-  theme(
-    plot.title = element_text(size = 8),
-    plot.subtitle = element_text(size = 8),
-    complete = TRUE,
-    legend.position = "bottom")
-```
 
-```{r}
 cancer_all <- clean_names(cancer_all)
 ```
-```{r}
-cancer_all(head(view al))
-```
+
 
 
 
@@ -56,6 +45,7 @@ cancer_all(head(view al))
 ### Purpose of the Data Review
 
 In order to inform current and future planning for provision of cancer treatment services in NHS Borders, you would like to gain a better understanding of the incidence of cancer in NHS Borders.
+For example if there is a higher than average type of cancer detected in te Borders, or disparity in the number of cancer patients by gender then resources may need to be allocated in a different way or preventative activity increased.
 
 
 ###Overview of Trends in Cancer in NHS Borders
@@ -69,20 +59,56 @@ gender_count <-cancer_allBorders%>%
   count(sex)
 ```
 
+```{r}
+ cance_gender_incidence <-cancer_allBorders%>% 
+  select(sex, incidences_all_ages)%>%
+  count(sex, incidences_all_ages)
+
+  
+```
+```{r}
+cance_gender_incidence%>%
+  summarise(sex "Female")
+```
+
+
+```{r}
+cancer_allBorders %>%
+  filter(cancer_site == "All cancer types") %>%
+  filter(sex != "All")
+```
+
+
 
 ```{r}
 cancer_allBorders %>%
   filter(cancer_site == "All cancer types") %>%
   filter(sex != "All") %>%
- ggplot +
-  aes(x = year, y = incidences_all_ages, colour = sex) +
-  geom_line() +
+  ggplot(aes(x = year, y = incidences_all_ages, fill = sex))+
+  geom_col(position = "dodge") +
   labs(
     x = "Year",
     title = "All cancer cases in Borders",
     subtitle =  "2016 to 2022",
-    y = "incidence")
+    y = "Incidence")
 ```
+
+The data set indicates a slightly higher rate of cancer in men than women in the Borders over the period 2016 - 2022.  
+Further age profiling of cases is particularly interesting with the highest propensity for cancer coming in the older age profiles
+
+```{r}
+  cancer_allBorders%>%
+  mutate(sex = "Male")%>%
+  ggplot(aes(x = cancer_site, y = incidences_all_ages))+
+  geom_col(position = "dodge") +
+  labs(
+    x = "Type of Cancer",
+    title = "Male Cancer Types by Age",
+    subtitle =  "2016 to 2022",
+    y = "Incidence")
+```
+
+
 
 
 
@@ -101,7 +127,12 @@ cancer_allBorders %>%
     subtitle =  "2016 to 2022",
     y = ""
   ) +
-  theme_mhairi
+  theme_classic()
+
+```
+
+```{r}
+plot_left
 ```
 
 ## Including Plots
