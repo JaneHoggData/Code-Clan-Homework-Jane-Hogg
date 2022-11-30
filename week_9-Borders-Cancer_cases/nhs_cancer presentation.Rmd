@@ -10,11 +10,7 @@ output: html_document
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r}
 library(tidyverse)
@@ -45,7 +41,8 @@ cancer_all <- clean_names(cancer_all)
 ### Purpose of the Data Review
 
 In order to inform current and future planning for provision of cancer treatment services in NHS Borders, you would like to gain a better understanding of the incidence of cancer in NHS Borders.
-For example if there is a higher than average type of cancer detected in te Borders, or disparity in the number of cancer patients by gender then resources may need to be allocated in a different way or preventative activity increased.
+
+For example if there is a higher than average type of cancer detected in the Borders, or disparity in the number of cancer patients by gender then resources may need to be allocated in a different way or preventative screening activity increased.
 
 
 ###Overview of Trends in Cancer in NHS Borders
@@ -64,20 +61,7 @@ gender_count <-cancer_allBorders%>%
   select(sex, incidences_all_ages)%>%
   count(sex, incidences_all_ages)
 
-  
 ```
-```{r}
-cance_gender_incidence%>%
-  summarise(sex "Female")
-```
-
-
-```{r}
-cancer_allBorders %>%
-  filter(cancer_site == "All cancer types") %>%
-  filter(sex != "All")
-```
-
 
 
 ```{r}
@@ -94,12 +78,24 @@ cancer_allBorders %>%
 ```
 
 The data set indicates a slightly higher rate of cancer in men than women in the Borders over the period 2016 - 2022.  
-Further age profiling of cases is particularly interesting with the highest propensity for cancer coming in the older age profiles
+
 
 ```{r}
   cancer_allBorders%>%
   mutate(sex = "Male")%>%
-  ggplot(aes(x = cancer_site, y = incidences_all_ages))+
+  ggplot(aes(x = cancer_site, y = incidences_all_ages, fill = "Male"))+
+  geom_col(position = "dodge") +
+  labs(
+    x = "Type of Cancer",
+    title = "Male Cancer Types by Age NHS Borders",
+    subtitle =  "2016 to 2022",
+    y = "Incidence")
+```
+
+```{r}
+cancer_allBorders%>%
+  mutate(sex = "Male")%>%
+  ggplot(aes(x = cancer_site, y = incidence_rate_age10to14, fill = "Male"))+
   geom_col(position = "dodge") +
   labs(
     x = "Type of Cancer",
@@ -109,38 +105,94 @@ Further age profiling of cases is particularly interesting with the highest prop
 ```
 
 
+#Further age profiling of cases is particularly interesting with the highest propensity for cancer coming in the older age profiles would indicate that the highest case are coming from the older age ranges.  In addition that in the Borders there is a growing number of older people - resources may need to be allocated to preventative measures for the older people in the community or increasing take up of screening at key ages (Bowel/Prostrate Screeing)
+
+```{r}
+most_common_Cancer <-cancer_allBorders %>%
+  filter(cancer_site != "All cancer types") %>%
+  filter(sex == "All") %>% 
+  filter(year >= 2012) %>%
+  group_by(cancer_site) %>%
+  summarise(
+    cases = sum(incidences_all_ages)
+  ) %>%
+  top_n(10) %>%
+  pull(cancer_site)
+```
+
+
+```{r}
+view(most_common_Cancer)
+```
+
+1 Basal cell carcinoma of the skin
+2 Breast
+3 Colon
+4 Colorectal cancer
+5 Malignant melanoma of the skin
+6 Non-Hodgkin lymphoma
+7 Non-melanoma skin cancer
+8 Rectum and rectosigmoid junction
+9 Squamous cell carcinoma of the skin
+10 Trachea, bronchus and lung
 
 
 
 
-```{r,fig.height=2}
-plot_left <- 
-cancer_allBorders %>%
-  filter(cancer_site == "All cancer types") %>%
-  filter(sex != "All") %>%
- ggplot +
-  aes(x = year, y = incidences_all_ages, colour = sex) +
-  geom_line() +
-  labs(
-    x = "Year",
-    title = "All cancer cases in Borders",
-    subtitle =  "2016 to 2022",
-    y = ""
-  ) +
-  theme_classic()
+## Comparing the Border to other local authorities
 
+Borders is geographically spread, rural and with a smaller population in relation to a numbe of other place in Scotland.  Employment is heavily focused on farming.  Comparative analysis across all local authorizes (in particular cities with a higher population) may not be that helpful and so my analysis has focused on a comparable area - Dumfries & Galloway.
+
+```{r}
+cancer_dumfries <-cancer_all %>%
+  filter(hb == "S08000017")
 ```
 
 ```{r}
-plot_left
+cancer_dumfries %>%
+  filter(cancer_site == "All cancer types") %>%
+  filter(sex != "All") %>%
+  ggplot(aes(x = year, y = incidences_all_ages, fill = sex))+
+  geom_col(position = "dodge") +
+  labs(
+    x = "Year",
+    title = "All cancer cases in Dumfries",
+    subtitle =  "2016 to 2022",
+    y = "Incidence")
+```
+## Interesting that this would suggest that there is little difference between genders in Dumfries.  
+
+
+```{r}
+most_commondumfries <-cancer_dumfries %>%
+  filter(cancer_site != "All cancer types") %>%
+  filter(sex == "All") %>% 
+  filter(year >= 2012) %>%
+  group_by(cancer_site) %>%
+  summarise(
+    cases = sum(incidences_all_ages)
+  ) %>%
+  top_n(10) %>%
+  pull(cancer_site)
+```
+```{r}
+view(most_commondumfries)
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+1 Basal cell carcinoma of the skin
+2 Breast
+3 Colon
+4 Colorectal cancer
+5 Head and neck
+6 Non-Hodgkin lymphoma
+7 Non-melanoma skin cancer
+8 Rectum and rectosigmoid junction
+9 Squamous cell carcinoma of the skin
+10 Trachea, bronchus and lung
+
+There is limited difference in the top 10 types of cancer other than in Dumfries the incidence of Head and Neck related cancer appears in the data.
+
+
