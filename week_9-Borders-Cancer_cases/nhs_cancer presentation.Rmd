@@ -160,7 +160,9 @@ cancer_dumfries %>%
     subtitle =  "2016 to 2022",
     y = "Incidence")
 ```
-## Interesting that this would suggest that there is little difference between genders in Dumfries.  
+
+
+##Interesting that this would suggest that there is little difference between genders in Dumfries.  
 
 
 ```{r}
