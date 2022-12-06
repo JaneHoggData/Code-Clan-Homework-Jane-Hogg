@@ -1,0 +1,87 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(fastDummies)
+library(GGally)
+library(ggfortify)
+library(mosaic)
+library(mosaicData)
+```
+
+
+```{r}
+library(readr)
+housing_prices <- read_csv("4_homework/data/housing_prices.csv")
+View(housing_prices)
+```
+
+```{r}
+housing_prices%>%
+  clean_names()
+```
+
+
+#1 We expect the total_rooms of houses to be strongly correlated with total_bedrooms. Use ggpairs() to investigate correlations between these two variables.
+
+
+```{r}
+rooms_bedrooms <- housing_prices %>%
+  select(total_rooms, total_bedrooms)
+```
+
+
+
+```{r}
+library(GGally)
+ggpairs(rooms_bedrooms) + theme_grey()
+```
+
+##strong correlation between the number of bedrooms and the number of rooms overall.
+
+##So, we do find significant correlations. Let’s drop total_bedrooms from the dataset, and use only total_rooms going forward.
+
+
+```{r}
+housing_pricestrimmed <-housing_prices%>%
+  select(-c (total_bedrooms))  
+  
+```
+
+```{r}
+library(GGally)
+ggpairs(housing_pricestrimmed) + theme_grey()
+```
+
+##That looks a mess - loads of blobs and not sure what it is showing.
+
+
+We are interested in developing a regression model for the median_house_value of a house in terms of the possible predictor variables in the dataset.
+
+Use ggpairs() to investigate correlations between median_house_value and the predictors (this may take a while to run, don’t worry, make coffee or something).
+
+```{r}
+housing_pricestrimmed %>%
+  ggplot(aes(median_house_value,ocean_proximity)) + 
+  geom_boxplot()
+```
+##oriximity to the ocean is the variable that is more likely to impact on the value of  property
+
+```{r}
+housing_pricestrimmed%>%
+  ggpairs(median_house_value,ocean_proximity)+theme_grey()
+```
+
+```{r}
+housing_pricestrimmed %>%
+  ggplot(aes(median_house_value, oceanprox))+
+  geom_point()
+  
+```
+
+
+```{r}
