@@ -220,7 +220,8 @@ summary(mod3)
 
 ```{r}
 ggplot(housing_pricestrimmed, aes (x = median_income))+
-  geom_histogram()
+  geom_histogram()+
+  theme_classic()
 ```
 
 
