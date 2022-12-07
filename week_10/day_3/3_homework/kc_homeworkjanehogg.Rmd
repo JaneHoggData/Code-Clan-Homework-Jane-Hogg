@@ -1,0 +1,70 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(fastDummies)
+library(GGally)
+library(ggfortify)
+library(mosaic)
+library(mosaicData)
+```
+
+```{r}
+library(readr)
+kc_house_data <- read_csv("data/kc_house_data.csv")
+View(kc_house_data)
+```
+
+##Q1 Tidy the data for regression
+
+
+```{r}
+kc_house_data%>%
+  clean_names()
+```
+
+```{r}
+glimpse(kc_house_data)
+```
+
+
+```{r}
+head(kc_house_data)
+```
+```{r}
+kchouseclean <- kc_house_data %>%
+  drop_na()
+```
+
+##reduced the amount of data to only 5 variables.
+
+```{r}
+kcsimplehousedata <-kchouseclean%>%
+  select(price,yr_built,yr_renovated,bedrooms,grade)
+```
+
+
+##First Predictor
+
+```{r}
+kcsimplehousedata%>%
+  ggplot(aes(x = price, y = yr_built))+
+  geom_point()+
+  theme_classic()+
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+
+
+
+
+
+
+
+
+
