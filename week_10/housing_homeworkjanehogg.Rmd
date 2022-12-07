@@ -33,6 +33,66 @@ glimpse(housing_prices)
 
 #1 We expect the total_rooms of houses to be strongly correlated with total_bedrooms. Use ggpairs() to investigate correlations between these two variables.
 
+## Firstly looked at developing some other bedrooms
+```{r}
+bear_in_house <-housing_prices %>%
+  mutate(bedrooms_per_house = total_bedrooms/households,
+         rooms_per_house = total_rooms/households,
+         people_per_house = population/households,
+         bedrooms_per_house = total_bedrooms/population,
+         rooms_per_house = total_rooms/population,
+         bedrooms_per_house = total_bedrooms / total_rooms,
+         non_bedrooms_per_house = rooms_per_house- bedrooms_per_house)
+```
+```{r}
+glimpse(bear_in_house)
+```
+
+
+```{r}
+ggpairs1 <-bear_in_house%>%
+  select(median_house_value,
+         housing_median_age,
+         ocean_proximity,
+         median_income)%>%
+  ggpairs()%>%
+
+
+```
+
+
+
+```{r}
+ggpairs2 <-bear_in_house%>%
+  select(median_house_value,
+         total_rooms,
+         rooms_per_house,
+         total_bedrooms,
+         bedrooms_per_house)%>%
+ggpairs()
+
+```
+
+
+```{r}
+ggpairs3 <-bear_in_house%>%
+  select(median_house_value,
+         )
+```
+
+
+```{r}
+bear_in_house%>%
+  count(ocean_proximity)
+```
+
+```{r}
+bear_in_house%>%
+  select(ocean_proximity, median_house_value)
+
+```
+
+
 
 ```{r}
 rooms_bedrooms <- housing_prices %>%
@@ -118,8 +178,56 @@ housing_pricestrimmed %>%
 #4 dummy predictors
 
 ```{r}
-
+housing_pricestrimmed %>%
+  ggplot(aes(x = housing_median_age, y = median_house_value)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
 ```
+
+```{r}
+mod1 <- lm(median_house_value ~ median_income,
+           data = housing_pricestrimmed)
+
+summary(mod1)
+```
+##intercept of the house values is £45k
+##median income of £39k
+
+
+```{r}
+autoplot(mod1)
+```
+
+
+```{r}
+mod2<- lm(median_house_value ~ ocean_proximity,
+           data = housing_pricestrimmed)
+
+summary(mod2)
+
+ 
+```
+
+
+```{r}
+mod3<- lm(median_income ~ ocean_proximity,
+           data = housing_pricestrimmed)
+
+summary(mod3)
+```
+
+
+
+```{r}
+ggplot(housing_pricestrimmed, aes (x = median_income))+
+  geom_histogram()
+```
+
+
+
+
+
+
 
 
 
