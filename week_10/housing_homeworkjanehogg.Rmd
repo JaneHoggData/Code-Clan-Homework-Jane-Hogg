@@ -26,6 +26,11 @@ housing_prices%>%
 ```
 
 
+```{r}
+glimpse(housing_prices)
+```
+
+
 #1 We expect the total_rooms of houses to be strongly correlated with total_bedrooms. Use ggpairs() to investigate correlations between these two variables.
 
 
@@ -41,7 +46,11 @@ library(GGally)
 ggpairs(rooms_bedrooms) + theme_grey()
 ```
 
-##strong correlation between the number of bedrooms and the number of rooms overall.
+## strong correlation between the number of bedrooms and the number of rooms overall.
+
+## correlations and coefficient - 1 - 0 - so anything close to 1 then strong correlation.
+
+## coefficnet is a number that expresses a measurment of a particular quantity of a substance or object.
 
 ##So, we do find significant correlations. Let’s drop total_bedrooms from the dataset, and use only total_rooms going forward.
 
@@ -64,24 +73,54 @@ We are interested in developing a regression model for the median_house_value of
 
 Use ggpairs() to investigate correlations between median_house_value and the predictors (this may take a while to run, don’t worry, make coffee or something).
 
+
+```{r}
+ggpairs(housing_pricestrimmed)
+```
+
+
+```{r}
+housing_pricestrimmed %>%
+  ggplot(aes(x = median_income, y = median_house_value)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+##so do produce a number of plots to look at the predictable variable.
+
+```{r}
+housing_pricestrimmed %>%
+  ggplot(aes(x = latitude, y = median_house_value)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+##keep the Y axis constant (median house value) and then change the x axis.
+```{r}
+housing_pricestrimmed%>%
+  ggplot(aes(x = ocean_proximity, y = median_house_value)) +
+  geom_boxplot()
+```
+
+##This was wrong below - look at the section above.
+
 ```{r}
 housing_pricestrimmed %>%
   ggplot(aes(median_house_value,ocean_proximity)) + 
   geom_boxplot()
 ```
-##oriximity to the ocean is the variable that is more likely to impact on the value of  property
+
 
 ```{r}
-housing_pricestrimmed%>%
-  ggpairs(median_house_value,ocean_proximity)+theme_grey()
+housing_pricestrimmed %>% 
+  distinct(ocean_proximity)
 ```
 
+#4 dummy predictors
+
 ```{r}
-housing_pricestrimmed %>%
-  ggplot(aes(median_house_value, oceanprox))+
-  geom_point()
-  
+
 ```
 
 
-```{r}
+
+
