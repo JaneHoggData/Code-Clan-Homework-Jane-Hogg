@@ -34,12 +34,65 @@ glimpse(kc_house_data)
 
 
 ```{r}
-head(kc_house_data)
+houses_tidy <- kc_house_data %>%
+  select(-c("id", "date", "sqft_living15", "sqft_lot15", "zipcode")) %>%
+  mutate(waterfront = as.logical(waterfront)) %>%
+  mutate(renovated = yr_renovated != 0) %>%
+  select(-"yr_renovated") %>%
+  mutate(view = as_factor(view)) %>% 
+  mutate(condition = as_factor(condition)) %>%
+  mutate(grade = as_factor(grade))
+```
+
+
+
+
+
+```{r}
+head(houses_tidy)
 ```
 ```{r}
 kchouseclean <- kc_house_data %>%
   drop_na()
 ```
+
+
+```{r}
+alias(price ~ ., data = houses_tidy)
+```
+
+#look for the -1 numerical
+
+
+```{r}
+houses_tidy <- houses_tidy %>%
+  select(-"sqft_living")
+```
+
+
+```{r}
+houses_tidy_numeric <- houses_tidy %>%
+  select_if(is.numeric)
+
+houses_tidy_nonnumeric <- houses_tidy %>%
+  select_if(function(x) !is.numeric(x))
+
+houses_tidy_nonnumeric$price <- houses_tidy$price
+```
+
+```{r}
+ggpairs(houses_tidy_numeric)
+```
+
+
+
+
+```{r}
+ggpairs(houses_tidy_numeric, columns = c(1, 2, 3, 4))
+```
+
+
+###This is all incorrect and now following the homewor.
 
 ##reduced the amount of data to only 5 variables.
 
@@ -60,7 +113,15 @@ kcsimplehousedata%>%
 ```
 
 
+```{r}
+skimr::skim(kcsimplehousedata)%>%
+  view()
+```
 
+```{r}
+kcsimplehousedata%>%
+  ggpairs(aes(colour = price, alpha = 0.5))
+```
 
 
 
