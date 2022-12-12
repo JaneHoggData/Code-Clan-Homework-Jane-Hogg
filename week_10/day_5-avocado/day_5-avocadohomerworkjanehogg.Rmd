@@ -50,7 +50,8 @@ avocado_clean <-avocado%>%
 
 
 ```{r}
-
+avocado_clean%>%
+  skimr::base_skimmers(avocado_clean)
 ```
 
 
@@ -59,6 +60,7 @@ view(avocado_clean)
 ```
 
 ##Removed the bags and date so that we are able to concentrate on the average price and the volume of individual avocadoes purchased. Reduced to 9 variable now.
+##Could have done Train - Test - split at this point
 
 ```{r}
 avocado_trim<- avocado_clean %>%
@@ -79,7 +81,7 @@ avocado_trim %>%
   ggpairs()
 ```
 
-##Amongst the continuous predictors we see here that x4770 (large Hass Avocado/Type/Time of the year) has some assiation with the price.
+##Amongst the continuous predictors we see here that x4770 (large Hass Avocado/Type/Time of the year) has some association with the price.
 
 ##Building the models
 ##PLU4770 = large avocado
