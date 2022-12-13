@@ -46,9 +46,10 @@ titanic_clean <- titanic_set %>%
     mutate(sex = as.factor(sex), 
            age_status = as.factor(if_else(age <= 16, "child", "adult")),
          class = factor(pclass, levels = c(3,2,1), labels = c("Lower", "Middle", "Upper")), 
-           survived_flag = factor(survived, levels = c(0,1), labels = c("No", "Yes")), 
+           survived_flag = factor(survived, levels = c(0,1), labels = c("Died", "Survived")), 
            port_embarkation = as.factor(embarked)) %>%
   select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) %>%
+  
   na.omit()
 ```
 
@@ -138,14 +139,30 @@ What variables are important? class of passenger, gender and number of siblings 
 What does each node tell you?
 
 male/adults most unlikely to survive.
-Female passenger travelling along were next least likely to survive.
+Female passenger/lower class travelling along were next least likely to survive.
 Chldren with no other siblings and travelling alone/nanny also least likely to survive.
 
 Who has the highest chance of surviving? Women in upper class sections of the boat.
 
-Who has the lowest? men/lower classs section.
+Who has the lowest? men/lower class section.
+
+#Predictors
+
+```{r}
+library(modelr)
+```
+
+```{r}
+titanic_test_pred <- titanic_test %>%
+  add_predictions(titanic_fit, type = 'class')
+```
 
 
+```{r}
+titanic_test_pred %>%
+  select(sex, age_status,class,port_embarkation,sib_sp, parc,survived_flag,pred)
+```
+#####
 
 
 
