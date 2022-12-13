@@ -1,0 +1,155 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+#Purpose of the homework is to create a decision tree to see which factors are useful in predicting whether or not a passenger on the titanic will survive.
+#Which factors are useful as the x variable?
+#Data Dictionary
+sex: Biological Sex, male or female
+age_status: adult or child (child defined as under 16)
+class : Ticket class, 1 = 1st (Upper class), 2 = 2nd (Middle Class), 3 = 3rd (Lower Class)
+port_embarkation: C = Cherbourg, Q = Queenstown, S = Southampton
+sibsp : number of siblings / spouses aboard the Titanic
+parch: number of parents / children aboard the Titanic. Some children travelled only with a nanny, therefore parch=0 for them.
+survived_flag : did they survive, 0 = No, 1 = Yes
+
+```{r}
+library(rpart)
+library(rpart.plot)
+library(tidyverse)
+library(janitor)
+library(fastDummies)
+library(GGally)
+library(ggfortify)
+library(mosaic)
+library(mosaicData)
+
+library(tidyverse)
+library(readr)
+titanic_set <- read_csv('3_homework/data/titanic_decision_tree_data.csv')
+
+
+shuffle_index <- sample(1:nrow(titanic_set))
+
+
+titanic_set <- titanic_set[shuffle_index, ]
+```
+```{r}
+
+```
+
+```{r}
+titanic_clean <- titanic_set %>%
+  filter(survived %in% c(0,1)) %>%
+
+    mutate(sex = as.factor(sex), 
+           age_status = as.factor(if_else(age <= 16, "child", "adult")),
+         class = factor(pclass, levels = c(3,2,1), labels = c("Lower", "Middle", "Upper")), 
+           survived_flag = factor(survived, levels = c(0,1), labels = c("No", "Yes")), 
+           port_embarkation = as.factor(embarked)) %>%
+  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) %>%
+  na.omit()
+```
+
+```{r}
+ggplot(titanic_clean) +
+  geom_bar(aes(y = survived, x = class()))
+```
+
+
+```{r}
+ggplot(titanic_clean) +
+  geom_bar(aes(x = class, fill = survived_flag))
+```
+
+#lower class least likely to survive.
+
+```{r}
+ggplot(titanic_clean) +
+  geom_bar(aes(x = age_status, fill = survived_flag))
+```
+
+#inconclusive on this one.
+
+
+```{r}
+ggplot(titanic_clean) +
+  geom_bar(aes(x = sib_sp, fill = survived_flag))
+```
+
+#Children travelling along with nanny less likely to survive. Only child
+
+```{r}
+ggplot(titanic_clean) +
+  geom_bar(aes(x = port_embarkation, fill = survived_flag))
+```
+
+#Passenger embarking from Southhampton more likely to die - but more got on in Southamption.
+
+#Test Train and SPlit
+
+```{r}
+set.seed(19)
+
+# get how many rows we have in total to work out the percentage
+n_data <- nrow(titanic_clean)
+
+# create a test sample index
+test_index <- sample(1:n_data, size = n_data*0.2)
+
+# create test set
+titanic_test  <- slice(titanic_clean, test_index)
+
+# create training set
+titanic_train <- slice(titanic_clean, -test_index)
+```
+
+
+```{r}
+titanic_test %>%
+ janitor::tabyl(survived_flag)
+```
+
+```{r}
+titanic_train %>%
+ janitor::tabyl(survived_flag)
+```
+#Fair split for this purpose.
+
+#Decision Tree
+
+```{r}
+titanic_fit <- rpart(
+  formula = survived_flag ~ ., 
+  data = titanic_train, 
+  method = 'class'
+)
+
+rpart.plot(titanic_fit, 
+           yesno = 2, 
+           fallen.leaves = TRUE, 
+           faclen = 6, 
+           digits = 4)
+```
+
+
+What variables are important? class of passenger, gender and number of siblings (if a child) 
+What does each node tell you?
+
+male/adults most unlikely to survive.
+Female passenger travelling along were next least likely to survive.
+Chldren with no other siblings and travelling alone/nanny also least likely to survive.
+
+Who has the highest chance of surviving? Women in upper class sections of the boat.
+
+Who has the lowest? men/lower classs section.
+
+
+
+
+
+
+
+
+
