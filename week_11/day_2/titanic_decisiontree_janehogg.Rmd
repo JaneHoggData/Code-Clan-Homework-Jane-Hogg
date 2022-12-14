@@ -55,7 +55,7 @@ titanic_clean <- titanic_set %>%
 
 ```{r}
 ggplot(titanic_clean) +
-  geom_bar(aes(y = survived, x = class()))
+  geom_bar(aes(x = survived_flag))
 ```
 
 
@@ -90,6 +90,7 @@ ggplot(titanic_clean) +
 
 #Test Train and SPlit
 
+#Model with the set seed section - looks like you must always clarify you are starting the model at a set point in the process.
 ```{r}
 set.seed(19)
 
@@ -137,10 +138,11 @@ rpart.plot(titanic_fit,
 
 What variables are important? class of passenger, gender and number of siblings (if a child) 
 What does each node tell you?
+Top Node - 0.41 survived / 0.58 died
 
-male/adults most unlikely to survive.
+male/adults most unlikely to survive. Survival rate of 0.17
 Female passenger/lower class travelling along were next least likely to survive.
-Chldren with no other siblings and travelling alone/nanny also least likely to survive.
+Children with a lot of siblings (more than 3)  least likely to survive.0.10 probability
 
 Who has the highest chance of surviving? Women in upper class sections of the boat.
 
@@ -150,6 +152,8 @@ Who has the lowest? men/lower class section.
 
 ```{r}
 library(modelr)
+library(yardstick)
+library(caret)
 ```
 
 ```{r}
@@ -160,13 +164,40 @@ titanic_test_pred <- titanic_test %>%
 
 ```{r}
 titanic_test_pred %>%
-  select(sex, age_status,class,port_embarkation,sib_sp, parc,survived_flag,pred)
+  select(sex,age_status,class,port_embarkation,sib_sp, parch,survived_flag,pred)
 ```
-#####
 
 
+```{r}
+titanic_test_pred <- titanic_test %>%
+                 add_predictions(titanic_fit, type = 'class')
 
 
+conf_mat <- titanic_test_pred %>%
+              conf_mat(truth = survived_flag, estimate = pred)
+conf_mat
+```
+#Let’s also see accuracy, TPR (sensitivity) and TNR (specificity)
 
+```{r}
+titanic_test_pred %>%
+  accuracy(truth = survived_flag, estimate = pred)
+```
 
+```{r}
+titanic_test_pred %>%
+  yardstick::sensitivity(truth = survived_flag, estimate = pred)
+```
+
+```{r}
+titanic_test_pred %>%
+  yardstick::specificity(truth = survived_flag, estimate = pred)
+```
+
+```{r}
+library(caret)
+confusionMatrix(data = titanic_test_pred$pred, reference = titanic_test_pred$survived_flag)  
+```
+
+#Accurancy of 0.82
 
