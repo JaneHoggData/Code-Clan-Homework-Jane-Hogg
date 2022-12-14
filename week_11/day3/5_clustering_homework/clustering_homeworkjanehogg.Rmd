@@ -1,0 +1,148 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(fastDummies)
+library(GGally)
+library(ggfortify)
+library(mosaic)
+library(mosaicData)
+library(cluster)
+library(factoextra)
+library(dendextend)
+```
+
+```{r}
+library(readr)
+mall_customers <- read_csv("data/mall_customers.csv")
+View(mall_customers)
+```
+
+```{r}
+mall_cust_clean <-mall_customers%>%
+  clean_names()
+```
+```{r}
+glimpse(mall_cust_clean)
+```
+
+
+
+
+
+```{r}
+ggplot(mall_cust_clean, aes (x = annual_income_k, y=spending_score_1_100 ))+
+  geom_point()
+```
+
+#looks like 5 clusters with a large one in the middle
+
+```{r}
+ggplot(mall_cust_clean) +
+  geom_bar(aes(x = annual_income_k, fill = gender))
+```
+
+#Female customer likely to be the higer of the spenders
+
+
+```{r}
+ggplot(mall_cust_clean) +
+  geom_bar(aes(x = spending, fill = gender))
+```
+
+
+```{r}
+ggplot(mall_cust_clean) +
+  geom_bar(aes(x = spending_score_1_100, fill = gender))
+```
+
+```{r}
+ggplot(mall_cust_clean, aes (x = annual_income_k, y=gender ))+
+  geom_point()
+```
+
+```{r}
+ggplot(mall_cust_clean, aes (x = spending_score_1_100, y=gender ))+
+  geom_point()
+```
+
+#scale the data
+
+```{r}
+cust_scaled2 <- mall_cust_clean%>%
+  mutate(gender = as.factor(gender))%>%
+  select(gender,age,spending_score_1_100,annual_income_k)%>%
+  na.omit()
+  
+```
+ 
+```{r}
+mall_subset1 <-cust_scaled2 %>%
+  select(c(annual_income_k, spending_score_1_100))
+```
+ 
+ 
+```{r}
+ggplot(mall_subset1, aes (x = annual_income_k, y= spending_score_1_100))+
+  geom_point()
+```
+ 
+ 
+```{r}
+set.seed (29)
+
+clusters5 <-kmeans(mall_subset1,
+       centers = 5,
+       nstart = 25)
+
+clusters5
+```
+
+```{r}
+library(broom)
+```
+```{r}
+tidy(clusters5)
+```
+```{r}
+augment(clusters5, cust_scaled2)
+```
+
+```{r}
+k_clusters <-tibble (k= 1:4)
+k_clusters
+```
+
+
+```{r}
+k_clusters <-tibble (k= 1:5)%>%
+  mutate(
+    kclust = map(k, ~kmeans (x =mall_subset1, centers = .x, nstart = 25)),
+    tidied = map(kclust,tidy),
+    glanced = map(kclust, glance),
+    augment = map(kclust, ~ augment(.x, mall_subset1))
+  )
+k_clusters
+```
+
+```{r}
+library(factoextra)
+```
+```{r}
+fviz_nbclust(mall_subset1,
+             kmeans,
+             method = "wss",
+             nstart = 25)
+```
+
+
+
+
+
+
+
+
