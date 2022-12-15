@@ -41,19 +41,38 @@ ggplot(mall_cust_clean, aes (x = annual_income_k, y=spending_score_1_100 ))+
 
 #looks like 5 clusters with a large one in the middle
 
+
+
+```{r}
+mall_cust_clean %>%
+  group_by(gender) %>%
+  summarise(count = n()) %>%
+  ggplot(aes(x = gender, y = count)) +
+  geom_col()
+```
+#More female customer than male - 
+
+
+```{r}
+ggplot(mall_cust_clean, aes(x = age)) +
+  geom_histogram(bins = 50, col = "white")
+```
+
+
+
 ```{r}
 ggplot(mall_cust_clean) +
   geom_bar(aes(x = annual_income_k, fill = gender))
 ```
 
-#Female customer likely to be the higer of the spenders
+#Female customer likely to be the higer of the spenders with two peaks at £55k and £75k
 
 
 ```{r}
 ggplot(mall_cust_clean) +
-  geom_bar(aes(x = spending, fill = gender))
+  geom_bar(aes(x = spending_score_1_100, fill = gender))
 ```
-
+#female customers have higher peaks of spending at 5-6 data points that would be worth considering from a marketing perspective.
 
 ```{r}
 ggplot(mall_cust_clean) +
@@ -140,6 +159,9 @@ fviz_nbclust(mall_subset1,
 ```
 
 
+```{r}
+fviz_nbclust(mall_subset1, kmeans, method = "silhouette", nstart = 25)
+```
 
 
 
