@@ -1,0 +1,68 @@
+---
+title: "R Notebook - Logistic Regression Homework - Orange Juice Preferences"
+output: html_notebook
+---
+
+
+## Objective - build the best predictive classifier you can of whether a customer is likely to buy Citrus Hill or Minute Maid juice. 
+##Use logistic regression to do this. 
+##Use either train-test splitting or cross-validation to evaluate your classifier. 
+##The metric for ‘best classifier’ will be highest AUC value either in the test set (for train-test splitting) or from cross-validation.
+
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(fastDummies)
+library(GGally)
+library(ggfortify)
+library(mosaic)
+library(mosaicData)
+library(modelr)
+library(readxl)
+```
+
+```{r}
+library(readr)
+orange_juiceclean <- read_csv("data/orange_juice.csv")
+
+  janitor::clean_names(orange_juice)
+  
+```
+```{r}
+glimpse(orange_juiceclean)
+```
+
+```{r}
+skimr::skim(orange_juiceclean) %>% view()
+```
+
+```{r}
+orange_summary <-orange_juiceclean%>%
+  select(Purchase, WeekofPurchase, PriceCH,PriceMM,LoyalCH)
+```
+
+```{r}
+ggpairs(orange_summary)
+```
+
+```{r}
+orange_summaryb <-orange_juiceclean %>%
+  select(Purchase, WeekofPurchase,LoyalCH, DiscCH, DiscMM)
+```
+
+```{r}
+ggpairs(orange_summaryb)
+```
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
