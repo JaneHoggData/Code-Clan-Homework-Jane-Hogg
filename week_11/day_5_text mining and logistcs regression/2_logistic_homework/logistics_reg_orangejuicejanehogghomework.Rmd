@@ -20,6 +20,7 @@ library(mosaic)
 library(mosaicData)
 library(modelr)
 library(readxl)
+
 ```
 
 ```{r}
@@ -27,6 +28,7 @@ library(readr)
 orange_juiceclean <- read_csv("data/orange_juice.csv")
 
   janitor::clean_names(orange_juice)
+  
   
 ```
 ```{r}
@@ -55,12 +57,21 @@ orange_summaryb <-orange_juiceclean %>%
 ggpairs(orange_summaryb)
 ```
 
-```{r}
 
+```{r}
+Orange_f <-orange_summaryb %>%
+  mutate(Purchase = ifelse(Purchase == 0, "No", "Yes")) %>%
+  mutate_if(is.character, as.factor)
 ```
 
 
+```{r}
+orange_model <- glm(Purchase ~ LoyalCH, data = Orange_f,
+                            family = binomial(link = 'logit'))
+summary(orange_model)
+```
 
+Not sure this is working at all -
 
 
 
