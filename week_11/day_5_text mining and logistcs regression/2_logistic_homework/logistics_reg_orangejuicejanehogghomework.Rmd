@@ -25,9 +25,9 @@ library(readxl)
 
 ```{r}
 library(readr)
-orange_juiceclean <- read_csv("data/orange_juice.csv")
+oj <- clean_names <- read_csv("data/orange_juice.csv")
 
-  janitor::clean_names(orange_juice)
+
   
   
 ```
@@ -38,6 +38,26 @@ glimpse(orange_juiceclean)
 ```{r}
 skimr::skim(orange_juiceclean) %>% view()
 ```
+
+
+```{r}
+oj <- orange_juiceclean %>%
+  rename(
+    week_of_purchase = weekof_purchase,
+    store_7 = store7
+  ) %>%
+  mutate(
+    special_ch = as.logical(special_ch),
+    special_mm = as.logical(special_mm),
+    store_7 = store_7 == "Yes",
+    store_id = as_factor(store_id),
+    store = as_factor(store)
+  )
+glimpse(oj)
+```
+
+
+
 
 ```{r}
 orange_summary <-orange_juiceclean%>%
